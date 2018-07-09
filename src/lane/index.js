@@ -91,8 +91,11 @@ export default class Lane {
   }
 
   static clearDB() {
-    db = []
-    dbIsFinished = false
+    return new Promise(resolve => {
+      db = []
+      dbIsFinished = false
+      resolve()
+    })
   }
 
   static loadAPI({count, time}) {
