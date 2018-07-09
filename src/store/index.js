@@ -30,9 +30,13 @@ export default class Store extends Event {
     this._initialize()
   }
 
+  /**
+   * 初始化
+   * @private
+   */
   _initialize() {
     this.loading = true
-    return Lane.loadDB(this.code, this.type)
+    Lane.loadDB(this.code, this.type)
       .then(({isFinished, data}) => {
         this._merge(data, false)
         this.loading = false
@@ -54,11 +58,15 @@ export default class Store extends Event {
     }
 
     const i = this.data.indexOf(item)
-    const begin = i - count + 1
-    const end = i + 1
-    return this.data.slice(begin < 0 ? 0 : begin, end)
+    const begin = i - count
+    return this.data.slice(begin < 0 ? 0 : begin, i)
   }
 
+  /**
+   * 保存数据
+   * @param data
+   * @private
+   */
   _save(data) {
     return Lane.saveDB(this.code, this.type, {
       data,
@@ -66,6 +74,13 @@ export default class Store extends Event {
     })
   }
 
+  /**
+   * 从后台服务器获取数据
+   * @param time
+   * @param count
+   * @returns {*|PromiseLike<void>|Promise<void>}
+   * @private
+   */
   _fetch(time, count) {
     time = Store.parseIndex(time)
     return Lane.loadAPI({
@@ -83,6 +98,12 @@ export default class Store extends Event {
     })
   }
 
+  /**
+   * 合并数据
+   * @param data
+   * @param update
+   * @private
+   */
   _merge(data, update = true) {
     data.forEach(d => {
       const i = Store.parseIndex(d)
@@ -92,11 +113,18 @@ export default class Store extends Event {
     this.data = Object.values(this.index)
     this._save(this.data)
 
+    // 需要发送 update 事件
     if (update) {
       this.emit('update', this.data)
     }
   }
 
+  /**
+   * 提供给外部的接口，加载更多数据
+   * @param obj
+   * @param count
+   * @returns {*}
+   */
   loadMore(obj, count) {
     // TODO 做加入队列
     if (this.loading) {
@@ -117,6 +145,7 @@ export default class Store extends Event {
     }
 
     const result = this._load(time, count)
+
     // 如果数据不够，从后台取数据
     if (!this.isFinished && result.length < count) {
       this._fetch(result[0] || time, count - result.length)

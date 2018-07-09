@@ -96,11 +96,18 @@ export default class Lane {
   }
 
   static loadAPI({count, time}) {
-    const d = stocks.filter(s => formatDay(s.date) === time)
-    const index = stocks.indexOf(d[0])
+    const last = formatDay(stocks[stocks.length - 1].date)
+    let begin, end
 
-    const begin = index - count + 1
-    const end = index + 1
+    if (time > last) {
+      begin = stocks.length - count
+      end = stocks.length
+    } else {
+      const d = stocks.filter(s => formatDay(s.date) === time)
+      end = stocks.indexOf(d[0])
+      begin = end - count
+    }
+
     return new Promise(resolve => resolve(stocks.slice(begin < 0 ? 0 : begin, end)))
   }
 }

@@ -62,7 +62,7 @@ describe('Store test', function() {
 
     store.done()
       .then(() => {
-        result = store.loadMore(begin, 11)
+        result = store.loadMore(new Date(), 11)
       })
   })
 
@@ -79,18 +79,18 @@ describe('Store test', function() {
 
       // 第二次加载会直接返回数据
       result = store.loadMore(begin, 5)
-      expect(result.length).toBe(5)
+      expect(result.length).toBe(4)
 
       // 如果数据不够，会返回已有的所有数据
       result = store.loadMore('2018-07-07', 5)
-      expect(result.length).toBe(4)
+      expect(result.length).toBe(3)
 
       done()
     })
 
     store.done()
       .then(() => {
-        result = store.loadMore(begin, 5)
+        result = store.loadMore(new Date(), 5)
       })
   })
 
