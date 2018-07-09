@@ -1,11 +1,35 @@
-let instance = null;
+import {
+  getDate,
+  addDays,
+  formatDay,
+} from '../utils/time'
+
+let instance = null
+
+// 模拟数据
+let db = []
+let dbIsFinished = false
+const begin = getDate('2018-07-08')
+const stocks = [{
+  date: begin,
+  value: 0,
+}]
+
+for(let i = -1; i > -10; i--) {
+  const date = addDays(begin, i)
+  stocks.unshift({
+    date,
+    value: i,
+  })
+}
 
 export default class Lane {
-  constructor() {
+  constructor(name = 'Stock') {
     if (instance) {
       return instance
     }
 
+    this.name = name
     this.stores = {}
     instance = this
   }
@@ -44,5 +68,39 @@ export default class Lane {
 
   static getTime() {
     return new Date()
+  }
+
+  static loadDB() {
+    return new Promise(resolve => {
+      resolve({
+        data: db,
+        isFinished: dbIsFinished,
+      })
+    })
+  }
+
+  static saveDB(code, type, {
+    data,
+    isFinished,
+  }) {
+    return new Promise(resolve => {
+      db = data
+      dbIsFinished = isFinished
+      resolve()
+    })
+  }
+
+  static clearDB() {
+    db = []
+    dbIsFinished = false
+  }
+
+  static loadAPI({count, time}) {
+    const d = stocks.filter(s => formatDay(s.date) === time)
+    const index = stocks.indexOf(d[0])
+
+    const begin = index - count + 1
+    const end = index + 1
+    return new Promise(resolve => resolve(stocks.slice(begin < 0 ? 0 : begin, end)))
   }
 }

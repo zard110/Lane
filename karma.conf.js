@@ -4,11 +4,11 @@ module.exports = function(config) {
     frameworks: ['jasmine'],
     browsers: ['Chrome'],
     preprocessors: {
-      './test/**/*.js': ['rollup', 'coverage']
+      './test/**/*.js': ['rollup']
     },
     rollupPreprocessor: {
       plugins: [
-        require('rollup-plugin-buble')(),
+        // require('rollup-plugin-buble')(),
       ],
       output: {
         format: 'iife',
@@ -20,7 +20,7 @@ module.exports = function(config) {
     autoWatch: true,
     colors: true,
     logLevel: config.LOG_INFO,
-    reporters: ['progress', 'coverage'],
+    reporters: ['progress'],
     coverageReporter: {
       type : 'html',
       dir : 'coverage/'

@@ -5,4 +5,5 @@ export default {
     file: 'dist/lane.js',
     format: 'iife'
   },
+  sourceMap: true,
 };
