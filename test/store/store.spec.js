@@ -32,7 +32,7 @@ describe('Store test', function() {
       })
   })
 
-  it('通过loadMore方法取数据', function(done) {
+  it('通过loadMore方法取数据并触发update事件', function(done) {
     const store = new Store(code, type)
     let result = []
 
@@ -71,6 +71,8 @@ describe('Store test', function() {
     let result = []
 
     store.on('update', () => {
+      store.off('update')
+
       expect(result.length).toBe(0)
       expect(store.data.length).toBe(5)
       expect(store.isFinished).toBe(false)
@@ -91,4 +93,6 @@ describe('Store test', function() {
         result = store.loadMore(begin, 5)
       })
   })
+
+  it('后台获取数据后会执行_save方法保存')
 })
