@@ -3,7 +3,7 @@ import {
   simpleStockDayProvider,
 } from "../api/mockstock";
 
-const Api = simpleStockDayProvider('2018-07-08', 10)
+const API = simpleStockDayProvider('2018-07-08', 10)
 const DB = simpleIndexDBProvider()
 
 let instance
@@ -79,6 +79,6 @@ export default class Lane {
   }
 
   static loadAPI(params) {
-    return Api(params)
+    return API(params)
   }
 }

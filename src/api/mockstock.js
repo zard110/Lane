@@ -1,8 +1,11 @@
+import Log from '../utils/log'
 import {
   addDays,
   formatDay,
   getDate,
 } from "../utils/time";
+
+const logger = new Log('mockstock.js', Log.Error)
 
 /**
  * 模拟日线股票生成器
@@ -26,12 +29,12 @@ export function simpleStockDayProvider(time, count) {
       value: i,
     })
   }
+  logger.debug('stocks api initialized: ', stocks)
 
-  console.log('stocks api initialized: ', stocks)
   let uid = 0
   return ({code, type, time, count}) => {
     const id = ++uid
-    console.log(`begin fetch(${id}), params is: `, {
+    logger.debug(`begin fetch(${id}), params is: `, {
       code,
       type,
       time,
@@ -53,7 +56,7 @@ export function simpleStockDayProvider(time, count) {
     const data = stocks.slice(begin < 0 ? 0 : begin, end)
     const isFinished = data.length < count
 
-    console.log(`end fetch(${id}), result is: `, {
+    logger.debug(`end fetch(${id}), result is: `, {
       data,
       isFinished,
     })
@@ -92,7 +95,7 @@ function clearDB(db, {
   code,
   type,
 } = {}) {
-  console.log('clear db: ', {
+  logger.debug('clear db: ', {
     code,
     type,
   })

@@ -18,12 +18,12 @@ describe('Store test', function() {
     jasmine.DEFAULT_TIMEOUT_INTERVAL = originalTimeout;
   });
 
-  it('刚实例化的Store处于loading状态', function() {
+  it('1.刚实例化的Store处于loading状态', function() {
     const store = new Store(code, type)
     expect(store.loading).toBe(true)
   })
 
-  it('通过done方法确认Store实例已经初始化完成', function(done) {
+  it('2.通过done方法确认Store实例已经初始化完成', function(done) {
     const store = new Store(code, type)
     store.done()
       .then(() => {
@@ -32,7 +32,7 @@ describe('Store test', function() {
       })
   })
 
-  it('通过loadMore方法取数据并触发update事件', function(done) {
+  it('3.通过loadMore方法取数据并触发update事件', function(done) {
     const store = new Store(code, type)
     let result = []
 
@@ -49,7 +49,7 @@ describe('Store test', function() {
       })
   })
 
-  it('通过loadMore方法取光数据', function(done) {
+  it('4.通过loadMore方法取光数据', function(done) {
     const store = new Store(code, type)
     let result = []
 
@@ -66,7 +66,7 @@ describe('Store test', function() {
       })
   })
 
-  it('保存之前读取的数据', function(done) {
+  it('5.保存之前读取的数据', function(done) {
     const store = new Store(code, type)
     let result = []
 
@@ -93,6 +93,4 @@ describe('Store test', function() {
         result = store.loadMore(new Date(), 5)
       })
   })
-
-  it('后台获取数据后会执行_save方法保存')
 })
