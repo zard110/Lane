@@ -1,27 +1,12 @@
 import {
-  getDate,
-  addDays,
-  formatDay,
-} from '../utils/time'
+  simpleIndexDBProvider,
+  simpleStockDayProvider,
+} from "../api/mockstock";
 
-let instance = null
+const Api = simpleStockDayProvider('2018-07-08', 10)
+const DB = simpleIndexDBProvider()
 
-// 模拟数据
-let db = []
-let dbIsFinished = false
-const begin = getDate('2018-07-08')
-const stocks = [{
-  date: begin,
-  value: 0,
-}]
-
-for(let i = -1; i > -10; i--) {
-  const date = addDays(begin, i)
-  stocks.unshift({
-    date,
-    value: i,
-  })
-}
+let instance
 
 export default class Lane {
   constructor(name = 'Stock') {
@@ -70,12 +55,10 @@ export default class Lane {
     return new Date()
   }
 
-  static loadDB() {
-    return new Promise(resolve => {
-      resolve({
-        data: db,
-        isFinished: dbIsFinished,
-      })
+  static loadDB(code, type) {
+    return DB.load({
+      code,
+      type,
     })
   }
 
@@ -83,34 +66,19 @@ export default class Lane {
     data,
     isFinished,
   }) {
-    return new Promise(resolve => {
-      db = data
-      dbIsFinished = isFinished
-      resolve()
+    return DB.save({
+      code,
+      type,
+      data,
+      isFinished,
     })
   }
 
   static clearDB() {
-    return new Promise(resolve => {
-      db = []
-      dbIsFinished = false
-      resolve()
-    })
+    return DB.clear()
   }
 
-  static loadAPI({count, time}) {
-    const last = formatDay(stocks[stocks.length - 1].date)
-    let begin, end
-
-    if (time > last) {
-      begin = stocks.length - count
-      end = stocks.length
-    } else {
-      const d = stocks.filter(s => formatDay(s.date) === time)
-      end = stocks.indexOf(d[0])
-      begin = end - count
-    }
-
-    return new Promise(resolve => resolve(stocks.slice(begin < 0 ? 0 : begin, end)))
+  static loadAPI(params) {
+    return Api(params)
   }
 }

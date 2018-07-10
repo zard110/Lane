@@ -88,12 +88,8 @@ export default class Store extends Event {
       type: this.type,
       count,
       time
-    }).then((data) => {
-      // 后台也没数据了
-      if (data.length < count) {
-        this.isFinished = true
-      }
-
+    }).then(({data, isFinished}) => {
+      this.isFinished = isFinished
       return this._merge(data)
     })
   }
