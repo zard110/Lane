@@ -1,11 +1,3 @@
-import {
-  simpleIndexDBProvider,
-  simpleStockDayProvider,
-} from "../api/mockstock";
-
-const API = simpleStockDayProvider('2018-07-08', 10)
-const DB = simpleIndexDBProvider()
-
 let instance
 
 export default class Lane {
@@ -53,32 +45,5 @@ export default class Lane {
 
   static getTime() {
     return new Date()
-  }
-
-  static loadDB(code, type) {
-    return DB.load({
-      code,
-      type,
-    })
-  }
-
-  static saveDB(code, type, {
-    data,
-    isFinished,
-  }) {
-    return DB.save({
-      code,
-      type,
-      data,
-      isFinished,
-    })
-  }
-
-  static clearDB() {
-    return DB.clear()
-  }
-
-  static loadAPI(params) {
-    return API(params)
   }
 }

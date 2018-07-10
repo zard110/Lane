@@ -1,13 +1,21 @@
 import Lane from '../lane/index'
 import Event from '../utils/event'
+
 import {
   formatDay,
 } from '../utils/time'
 
+import {
+  simpleIndexDBProvider,
+  simpleStockDayProvider,
+} from "../api/mockstock";
+const API = simpleStockDayProvider(new Date(), 100)
+const DB = simpleIndexDBProvider()
+
 let uid = 0;
 
 export default class Store extends Event {
-  constructor(code, type) {
+  constructor(code, type, {DB, API} = {}) {
     super()
 
     this.id = ++uid
@@ -26,6 +34,10 @@ export default class Store extends Event {
     // 数据索引
     this.index = {}
 
+    this.DB = DB || Store.DB
+
+    this.API = API || Store.API
+
     // 初始化加载数据
     this._initialize()
   }
@@ -36,7 +48,10 @@ export default class Store extends Event {
    */
   _initialize() {
     this.loading = true
-    Lane.loadDB(this.code, this.type)
+    this.DB.load({
+      code: this.code,
+      type: this.type,
+    })
       .then(({isFinished, data}) => {
         this._merge(data, false)
         this.loading = false
@@ -68,7 +83,9 @@ export default class Store extends Event {
    * @private
    */
   _save(data) {
-    return Lane.saveDB(this.code, this.type, {
+    return this.DB.save({
+      code: this.code,
+      type: this.type,
       data,
       isFinished: this.isFinished
     })
@@ -83,7 +100,7 @@ export default class Store extends Event {
    */
   _fetch(time, count) {
     time = Store.parseIndex(time)
-    return Lane.loadAPI({
+    return this.API({
       code: this.code,
       type: this.type,
       count,
@@ -150,6 +167,10 @@ export default class Store extends Event {
     return result
   }
 
+  /**
+   * 检测初始化状态
+   * @returns {Promise<any>}
+   */
   done() {
     return new Promise(resolve => {
       function check() {
@@ -182,3 +203,6 @@ export default class Store extends Event {
     return formatDay(obj instanceof Date ? obj : obj.date)
   }
 }
+
+Store.DB = DB
+Store.API = API
