@@ -7,6 +7,7 @@ import {
 
 const code = '860326'
 const type = '1d'
+const today = new Date()
 const begin = '2018-07-08'
 // 从2018-07-08开始创建10条数据
 const API = simpleStockDayProvider(begin, 10)
@@ -61,7 +62,7 @@ describe('Store test', function() {
 
     store.done()
       .then(() => {
-        result = store.loadMore(begin, 1)
+        result = store.loadMore(today, 1)
       })
   })
 
@@ -81,7 +82,7 @@ describe('Store test', function() {
 
     store.done()
       .then(() => {
-        result = store.loadMore(new Date(), 11)
+        result = store.loadMore(today, 11)
       })
   })
 
@@ -99,6 +100,8 @@ describe('Store test', function() {
       expect(store.data.length).toBe(5)
       expect(store.isFinished).toBe(false)
 
+      console.log(JSON.stringify(store.index, null, 2))
+
       // 第二次加载会直接返回已有的数据
       result = store.loadMore(begin, 5)
       expect(result.length).toBe(4)
@@ -112,7 +115,7 @@ describe('Store test', function() {
 
     store.done()
       .then(() => {
-        result = store.loadMore(new Date(), 5)
+        result = store.loadMore(today, 5)
       })
   })
 })

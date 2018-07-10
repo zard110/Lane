@@ -60,21 +60,24 @@ export default class Store extends Event {
       .catch(() => this.loading = false)
   }
 
-  _load(index, count) {
+  _load(time, count, last) {
     // 如果没有传索引，则返回全部数据
-    if (!index) {
+    if (!time) {
       return this.data.slice()
     }
 
-    const item = this.index[index]
+    let begin, end
 
-    if (!item) {
-      return []
+    // 标记时间大于最后一条数据时间
+    if (Store.needUpdate(last, time)) {
+      end = this.data.length
+    } else {
+      const item = this.index[time]
+      end = this.data.indexOf(item)
     }
 
-    const i = this.data.indexOf(item)
-    const begin = i - count
-    return this.data.slice(begin < 0 ? 0 : begin, i)
+    begin = end - count
+    return this.data.slice(begin < 0 ? 0 : begin, end)
   }
 
   /**
@@ -157,7 +160,7 @@ export default class Store extends Event {
       // TODO update
     }
 
-    const result = this._load(time, count)
+    const result = this._load(time, count, last)
 
     // 如果数据不够，从后台取数据
     if (!this.isFinished && result.length < count) {
