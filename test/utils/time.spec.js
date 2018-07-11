@@ -4,6 +4,10 @@ import {
   subStartMonths,
   subStartSeasons,
   subStartYears,
+  groupDateByWeek,
+  groupDateByMonth,
+  groupDateBySeason,
+  groupDateByYear,
 } from '../../src/utils/time'
 
 describe('Time test', function() {
@@ -81,5 +85,85 @@ describe('Time test', function() {
 
     expect(subStartYears(day, 1)).toEqual(getDate('2018-01-01'))
     expect(subStartYears(day, 2)).toEqual(getDate('2017-01-01'))
+  })
+
+  it('能够正确按星期分组', function() {
+    // [{date: xxx, value: xxx}, ...]
+    const origin = [
+      '2018-05-21', '2018-05-24',
+      '2018-05-28', '2018-05-30',
+      '2018-06-25',
+      '2018-07-02', '2018-07-03', '2018-07-06',
+      '2018-07-09', '2018-07-11',
+    ].map(d => {
+      return {
+        value: d,
+        date: getDate(d),
+      }
+    })
+
+    expect(groupDateByWeek(origin, 1).map(g => g.map(d => d.value)))
+      .toEqual([
+        ['2018-05-21', '2018-05-24'],
+        ['2018-05-28', '2018-05-30'],
+        ['2018-06-25'],
+        ['2018-07-02', '2018-07-03', '2018-07-06'],
+        ['2018-07-09', '2018-07-11'],
+      ])
+
+    expect(groupDateByWeek(origin, 2).map(g => g.map(d => d.value)))
+      .toEqual([
+        ['2018-05-21', '2018-05-24', '2018-05-28', '2018-05-30'],
+        ['2018-06-25'],
+        ['2018-07-02', '2018-07-03', '2018-07-06', '2018-07-09', '2018-07-11'],
+      ])
+
+    expect(groupDateByWeek(origin, 3).map(g => g.map(d => d.value)))
+      .toEqual([
+        ['2018-05-21', '2018-05-24', '2018-05-28', '2018-05-30'],
+        ['2018-06-25', '2018-07-02', '2018-07-03', '2018-07-06', '2018-07-09', '2018-07-11'],
+      ])
+  })
+
+  it('能正确按照月分组', function() {
+    const origin = [
+      '2017-12-21',
+      '2018-01-28',
+      '2018-03-25',
+      '2018-06-02', '2018-06-12',
+      '2018-07-11',
+    ].map(d => {
+      return {
+        value: d,
+        date: getDate(d),
+      }
+    })
+
+    expect(groupDateByMonth(origin, 1).map(g => g.map(d => d.value)))
+      .toEqual([
+        ['2017-12-21'],
+        ['2018-01-28'],
+        ['2018-03-25'],
+        ['2018-06-02', '2018-06-12'],
+        ['2018-07-11'],
+      ])
+
+    console.log(groupDateByMonth(origin, 2).map(g => g.map(d => d.value)))
+    // [12, 1] [2, 3], [4, 5] [6, 7]
+    expect(groupDateByMonth(origin, 2).map(g => g.map(d => d.value)))
+      .toEqual([
+        ['2017-12-21', '2018-01-28'],
+        ['2018-03-25'],
+        ['2018-06-02', '2018-06-12', '2018-07-11'],
+      ])
+
+    // 虽然结果和2个月分组一样，这是按照自然月分组而非数据的月份 [11, 12, 1] [2, 3, 4] [5, 6, 7]
+    console.log(groupDateByMonth(origin, 3).map(g => g.map(d => d.value)))
+    expect(groupDateByMonth(origin, 3).map(g => g.map(d => d.value)))
+      .toEqual([
+        ['2017-12-21', '2018-01-28'],
+        ['2018-03-25'],
+        ['2018-06-02', '2018-06-12', '2018-07-11'],
+      ])
   })
 })

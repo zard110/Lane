@@ -57,6 +57,86 @@ function _patch(str) {
 }
 
 /**
+ * 分组日期生成器
+ * @param sub
+ * @returns {Function}
+ */
+function groupDateProvider(sub) {
+  return function (data, amount = 1, accessor = d => d.date) {
+    if (!data || !data.length) {
+      return []
+    }
+
+    const result = []
+    let startDate = sub(accessor(data[data.length - 1]), amount)
+    let temp = []
+    for (let i = data.length - 1; i >= 0; i--) {
+      const d = data[i]
+      const date = accessor(d)
+
+      // 如果还在日期范围，则暂存
+      if (date >= startDate) {
+        temp.unshift(d)
+      } else {
+        // 已经超过指定日期范围，重新计算
+        result.unshift(temp)
+        temp = [d]
+        startDate = sub(date, amount)
+      }
+    }
+    if (temp.length) {
+      result.unshift(temp)
+    }
+
+    return result
+  }
+}
+
+/**
+ * 按星期分组
+ * @param data
+ * @param amount
+ * @param accessor
+ * @returns {*}
+ */
+export function groupDateByWeek(data, amount = 1, accessor = d => d.date) {
+  return groupDateProvider(subStartWeeks)(data, amount, accessor)
+}
+
+/**
+ * 按月分组
+ * @param data
+ * @param amount
+ * @param accessor
+ * @returns {*}
+ */
+export function groupDateByMonth(data, amount = 1, accessor = d => d.date) {
+  return groupDateProvider(subStartMonths)(data, amount, accessor)
+}
+
+/**
+ * 按季度分组
+ * @param data
+ * @param amount
+ * @param accessor
+ * @returns {*}
+ */
+export function groupDateBySeason(data, amount = 1, accessor = d => d.date) {
+  return groupDateProvider(subStartSeasons)(data, amount, accessor)
+}
+
+/**
+ * 按年分组
+ * @param data
+ * @param amount
+ * @param accessor
+ * @returns {*}
+ */
+export function groupDateByYear(data, amount = 1, accessor = d => d.date) {
+  return groupDateProvider(subStartYears)(data, amount, accessor)
+}
+
+/**
  * 获取周线周期的开始日期
  *
  * ._____. .___.___. .__.
