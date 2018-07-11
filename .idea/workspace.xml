@@ -40,11 +40,8 @@
       <file leaf-file-name="mockstock.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/api/mockstock.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="62">
-              <caret line="36" column="53" lean-forward="true" selection-start-line="36" selection-start-column="53" selection-end-line="36" selection-end-column="53" />
-              <folding>
-                <element signature="e#0#18#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="527">
+              <caret line="36" column="53" selection-start-line="36" selection-start-column="53" selection-end-line="36" selection-end-column="53" />
             </state>
           </provider>
         </entry>
@@ -53,7 +50,7 @@
         <entry file="file://$PROJECT_DIR$/test/store/store.spec.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="510">
-              <caret line="102" column="53" selection-start-line="102" selection-start-column="53" selection-end-line="102" selection-end-column="53" />
+              <caret line="102" selection-start-line="102" selection-end-line="102" />
               <folding>
                 <element signature="e#0#41#0" expanded="true" />
               </folding>
@@ -64,11 +61,8 @@
       <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/store/index.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="509">
-              <caret line="74" column="35" lean-forward="true" selection-start-line="74" selection-start-column="35" selection-end-line="74" selection-end-column="35" />
-              <folding>
-                <element signature="e#1#33#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="289">
+              <caret line="72" column="32" selection-start-line="72" selection-start-column="32" selection-end-line="72" selection-end-column="32" />
             </state>
           </provider>
         </entry>
@@ -87,8 +81,8 @@
       <find>isFinished</find>
       <find>stocks api initialized</find>
       <find>Lane.loadAPI</find>
-      <find>begin</find>
       <find>Lane.</find>
+      <find>begin</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -139,7 +133,7 @@
   </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="-7" />
-    <option name="width" value="1051" />
+    <option name="width" value="974" />
     <option name="height" value="1047" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -148,7 +142,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -200,6 +193,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -244,7 +238,8 @@
       <workItem from="1531131440342" duration="77000" />
       <workItem from="1531131528497" duration="5569000" />
       <workItem from="1531185613096" duration="546000" />
-      <workItem from="1531209733995" duration="10729000" />
+      <workItem from="1531209733995" duration="10952000" />
+      <workItem from="1531286744262" duration="444000" />
     </task>
     <task id="LOCAL-00001" summary="添加store">
       <created>1531131133335</created>
@@ -295,21 +290,27 @@
       <option name="project" value="LOCAL" />
       <updated>1531224618871</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="修改测试用例">
+      <created>1531226009409</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1531226009409</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="52536000" />
+    <option name="totallyTimeSpent" value="53203000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="0" width="1051" height="1047" extended-state="0" />
+    <frame x="-7" y="0" width="974" height="1047" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.22112536" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.23931624" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
-      <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Run" order="2" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -323,6 +324,7 @@
       <window_info anchor="bottom" id="Messages" order="7" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Find" order="1" />
     </layout>
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -690,28 +692,22 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/api/mockstock.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="62">
-          <caret line="36" column="53" lean-forward="true" selection-start-line="36" selection-start-column="53" selection-end-line="36" selection-end-column="53" />
-          <folding>
-            <element signature="e#0#18#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="527">
+          <caret line="36" column="53" selection-start-line="36" selection-start-column="53" selection-end-line="36" selection-end-column="53" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/store/index.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="509">
-          <caret line="74" column="35" lean-forward="true" selection-start-line="74" selection-start-column="35" selection-end-line="74" selection-end-column="35" />
-          <folding>
-            <element signature="e#1#33#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="289">
+          <caret line="72" column="32" selection-start-line="72" selection-start-column="32" selection-end-line="72" selection-end-column="32" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/test/store/store.spec.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="510">
-          <caret line="102" column="53" selection-start-line="102" selection-start-column="53" selection-end-line="102" selection-end-column="53" />
+          <caret line="102" selection-start-line="102" selection-end-line="102" />
           <folding>
             <element signature="e#0#41#0" expanded="true" />
           </folding>

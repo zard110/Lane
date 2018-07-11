@@ -100,8 +100,6 @@ describe('Store test', function() {
       expect(store.data.length).toBe(5)
       expect(store.isFinished).toBe(false)
 
-      console.log(JSON.stringify(store.index, null, 2))
-
       // 第二次加载会直接返回已有的数据
       result = store.loadMore(begin, 5)
       expect(result.length).toBe(4)

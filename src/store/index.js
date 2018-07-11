@@ -70,7 +70,7 @@ export default class Store extends Event {
 
     // 标记时间大于最后一条数据时间
     if (Store.needUpdate(last, time)) {
-      end = this.data.length
+      end = this.data.length - 1
     } else {
       const item = this.index[time]
       end = this.data.indexOf(item)
