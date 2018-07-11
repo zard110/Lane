@@ -1,3 +1,7 @@
+import {
+  subStartWeeks,
+} from '../utils/time'
+
 let instance
 
 export default class Lane {
@@ -5,6 +9,8 @@ export default class Lane {
     if (instance) {
       return instance
     }
+
+    subStartWeeks()
 
     this.name = name
     this.stores = {}

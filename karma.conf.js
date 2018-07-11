@@ -1,6 +1,9 @@
 module.exports = function(config) {
   config.set({
-    files: [{ pattern: 'test/**/*.spec.js', watched: true }],
+    files: [
+      'lib/date_fns.min.js',
+      { pattern: 'test/**/*.spec.js', watched: true },
+    ],
     frameworks: ['jasmine'],
     browsers: ['Chrome'],
     preprocessors: {
@@ -11,10 +14,14 @@ module.exports = function(config) {
         // require('rollup-plugin-buble')(),
       ],
       output: {
+        name: 'Lane',
         format: 'iife',
-        name: 'Vue',
-        sourcemap: 'inline'
-      }
+        sourceMap: 'inline',
+        globals: {
+          'date-fns': 'dateFns'
+        },
+      },
+      external: ['date-fns'],
     },
     singleRun: false,
     autoWatch: true,

@@ -4,6 +4,7 @@
   "description": "",
   "main": "rollup.conf.js",
   "dependencies": {
+    "date-fns": "^1.29.0",
     "lodash": "^4.17.10"
   },
   "devDependencies": {
