@@ -108,7 +108,7 @@ export function subStartSeasons(date, amount) {
   let year = date.getFullYear()
 
   // 每次递减1
-  if (amount > 0) {
+  if (amount > 1) {
     if (month >= 10) {
       month = 7
     } else if (month >= 7) {
