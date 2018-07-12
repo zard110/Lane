@@ -67,9 +67,12 @@ function groupDateProvider(sub) {
       return []
     }
 
+    const first = accessor(data[0])
+    const last = accessor(data[data.length - 1])
+    let startDate = sub(last, amount)
     const result = []
-    let startDate = sub(accessor(data[data.length - 1]), amount)
     let temp = []
+
     for (let i = data.length - 1; i >= 0; i--) {
       const d = data[i]
       const date = accessor(d)
@@ -81,7 +84,10 @@ function groupDateProvider(sub) {
         // 已经超过指定日期范围，重新计算
         result.unshift(temp)
         temp = [d]
-        startDate = sub(date, amount)
+
+        while (startDate > date) {
+          startDate = sub(startDate, amount + 1)
+        }
       }
     }
     if (temp.length) {
