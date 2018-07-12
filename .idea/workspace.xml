@@ -3,8 +3,6 @@
   <component name="ChangeListManager">
     <list default="true" id="e11a2dcb-9836-45bf-966a-e5cc691d6a09" name="Default" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/utils/time.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/time.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/utils/time.spec.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/utils/time.spec.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -1027,7 +1025,7 @@
       <workItem from="1531185613096" duration="546000" />
       <workItem from="1531209733995" duration="10952000" />
       <workItem from="1531286744262" duration="18691000" />
-      <workItem from="1531360693794" duration="5459000" />
+      <workItem from="1531360693794" duration="6314000" />
     </task>
     <task id="LOCAL-00001" summary="添加store">
       <created>1531131133335</created>
@@ -1113,11 +1111,18 @@
       <option name="project" value="LOCAL" />
       <updated>1531313288072</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="添加减周、月、季度、年的测试用例">
+      <created>1531376881688</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1531376881688</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="76909000" />
+    <option name="totallyTimeSpent" value="77764000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="0" width="974" height="1047" extended-state="0" />
