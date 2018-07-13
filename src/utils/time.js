@@ -67,7 +67,6 @@ function groupDateProvider(sub) {
       return []
     }
 
-    const first = accessor(data[0])
     const last = accessor(data[data.length - 1])
     let startDate = sub(last, amount)
     const result = []
@@ -95,6 +94,19 @@ function groupDateProvider(sub) {
     }
 
     return result
+  }
+}
+
+export function groupDateByMinute(data, amount = 1, accessor = d => d.date) {
+  if (!data || !data.length) {
+    return []
+  }
+
+  for (let i = 0, l = data.length; i < l; i++) {
+    const d = data[i]
+    const date = accessor(d)
+
+
   }
 }
 
