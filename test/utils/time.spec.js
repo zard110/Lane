@@ -6,15 +6,16 @@ import {
   subStartYears,
   groupDateByWeek,
   groupDateByMonth,
-  groupDateBySeason,
   groupDateByYear,
+  createTimeGroupZone,
 } from '../../src/utils/time'
 
 import Log from '../../src/utils/log'
+
 const logger = new Log('time.spec.js', Log.Error)
 
-describe('Time test', function() {
-  it('减单周获取正确的起始日期', function() {
+describe('Time test', function () {
+  it('减单周获取正确的起始日期', function () {
     // 星期三
     const day3 = getDate('2018-07-11')
 
@@ -25,7 +26,7 @@ describe('Time test', function() {
     expect(subStartWeeks(day1, 1)).toEqual(day1)
   })
 
-  it('减多周获取正确的起始日期', function() {
+  it('减多周获取正确的起始日期', function () {
     // 星期三
     const day3 = getDate('2018-07-11')
 
@@ -45,21 +46,21 @@ describe('Time test', function() {
     expect(subStartWeeks(day1, 3)).toEqual(day111)
   })
 
-  it('减单月获取正确的起始日期', function() {
+  it('减单月获取正确的起始日期', function () {
     const day = getDate('2018-01-11')
     const day0 = getDate('2018-01-01')
 
     expect(subStartMonths(day, 1)).toEqual(day0)
   })
 
-  it('减多月获取正确的起始日期', function() {
+  it('减多月获取正确的起始日期', function () {
     const day = getDate('2018-01-11')
     const day0 = getDate('2017-12-01')
 
     expect(subStartMonths(day, 2)).toEqual(day0)
   })
 
-  it('减单季度获取正确的起始日期', function() {
+  it('减单季度获取正确的起始日期', function () {
     const day11 = getDate('2018-11-11')
     const day8 = getDate('2018-08-11')
     const day5 = getDate('2018-05-11')
@@ -71,7 +72,7 @@ describe('Time test', function() {
     expect(subStartSeasons(day2, 1)).toEqual(getDate('2018-01-01'))
   })
 
-  it('减多季度获取正确的起始日期', function() {
+  it('减多季度获取正确的起始日期', function () {
     const day11 = getDate('2018-11-11')
     const day8 = getDate('2018-08-11')
     const day5 = getDate('2018-05-11')
@@ -83,14 +84,14 @@ describe('Time test', function() {
     expect(subStartSeasons(day2, 2)).toEqual(getDate('2017-10-01'))
   })
 
-  it('减年获取正确的起始日期', function() {
+  it('减年获取正确的起始日期', function () {
     const day = getDate('2018-07-08')
 
     expect(subStartYears(day, 1)).toEqual(getDate('2018-01-01'))
     expect(subStartYears(day, 2)).toEqual(getDate('2017-01-01'))
   })
 
-  it('能够正确按星期分组', function() {
+  it('能够正确按星期分组', function () {
     // [{date: xxx, value: xxx}, ...]
     const origin = [
       '2018-05-21', '2018-05-24', // 1
@@ -119,7 +120,7 @@ describe('Time test', function() {
       ])
   })
 
-  it('能够正确按2星期分组', function() {
+  it('能够正确按2星期分组', function () {
     // [{date: xxx, value: xxx}, ...]
     const origin = [
       '2018-05-21', '2018-05-24', // 1
@@ -137,7 +138,7 @@ describe('Time test', function() {
     })
 
     // [1, 2] [3, 4] [5, 6] [7, 8]
-    logger.debug('2W', groupDateByWeek(origin, 2).map(g => g.map(d => d.value)) )
+    logger.debug('2W', groupDateByWeek(origin, 2).map(g => g.map(d => d.value)))
     expect(groupDateByWeek(origin, 2).map(g => g.map(d => d.value)))
       .toEqual([
         ['2018-05-21', '2018-05-24', '2018-05-28', '2018-05-30'],
@@ -147,7 +148,7 @@ describe('Time test', function() {
       ])
   })
 
-  it('能够正确按3星期分组', function() {
+  it('能够正确按3星期分组', function () {
     // [{date: xxx, value: xxx}, ...]
     const origin = [
       '2018-05-21', '2018-05-24', // 1
@@ -174,7 +175,7 @@ describe('Time test', function() {
       ])
   })
 
-  it('能正确按照月分组', function() {
+  it('能正确按照月分组', function () {
     const origin = [
       '2017-11-21',
       '2017-12-21',
@@ -200,7 +201,7 @@ describe('Time test', function() {
       ])
   })
 
-  it('能正确按照2月分组', function() {
+  it('能正确按照2月分组', function () {
     const origin = [
       '2017-11-21',
       '2017-12-21',
@@ -226,7 +227,7 @@ describe('Time test', function() {
       ])
   })
 
-  it('能正确按照3月分组', function() {
+  it('能正确按照3月分组', function () {
     const origin = [
       '2017-11-21',
       '2017-12-21',
@@ -251,7 +252,7 @@ describe('Time test', function() {
       ])
   })
 
-  it('能正确按年分组', function() {
+  it('能正确按年分组', function () {
     const origin = [
       '2017-11-21',
       '2017-12-21',
@@ -276,5 +277,52 @@ describe('Time test', function() {
       .toEqual([
         ['2017-11-21', '2017-12-21', '2018-01-28', '2018-03-25', '2018-06-02', '2018-06-12', '2018-07-11'],
       ])
+  })
+
+  it('能正确创建amount = 1的时间范围', function () {
+    const result = createTimeGroupZone(1, ['09:30', '09:32'], ['09:40', '09:42'])
+    expect(result).toEqual({
+      '09:30': '09:31',
+      '09:31': '09:31',
+      '09:32': '09:32',
+      '09:40': '09:41',
+      '09:41': '09:41',
+      '09:42': '09:42',
+    })
+  })
+
+  it('能正确创建amount = 5的时间范围边界情况', function () {
+    const result = createTimeGroupZone(5, ['09:30', '09:40'])
+    expect(result).toEqual({
+      '09:30': '09:35',
+      '09:31': '09:35',
+      '09:32': '09:35',
+      '09:33': '09:35',
+      '09:34': '09:35',
+      '09:35': '09:35',
+      '09:36': '09:40',
+      '09:37': '09:40',
+      '09:38': '09:40',
+      '09:39': '09:40',
+      '09:40': '09:40',
+    })
+  })
+
+  it('能正确创建amount = 5的时间范围', function () {
+    const result = createTimeGroupZone(5, ['09:30', '09:41'])
+    expect(result).toEqual({
+      '09:30': '09:35',
+      '09:31': '09:35',
+      '09:32': '09:35',
+      '09:33': '09:35',
+      '09:34': '09:35',
+      '09:35': '09:35',
+      '09:36': '09:40',
+      '09:37': '09:40',
+      '09:38': '09:40',
+      '09:39': '09:40',
+      '09:40': '09:40',
+      '09:41': '09:45',
+    })
   })
 })

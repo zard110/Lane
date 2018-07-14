@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="e11a2dcb-9836-45bf-966a-e5cc691d6a09" name="Default" comment="">
+    <list default="true" id="e11a2dcb-9836-45bf-966a-e5cc691d6a09" name="Default" comment="添加减周、月、季度、年的测试用例">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/api/mockstock.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/mockstock.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/utils/time.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/utils/time.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test/utils/time.spec.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/utils/time.spec.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -29,8 +31,8 @@
       <file leaf-file-name="time.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/utils/time.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="280">
-              <caret line="79" column="30" selection-start-line="79" selection-start-column="30" selection-end-line="79" selection-end-column="30" />
+            <state relative-caret-position="86">
+              <caret line="17" lean-forward="true" selection-start-line="17" selection-end-line="17" />
               <folding>
                 <element signature="e#0#109#0" expanded="true" />
               </folding>
@@ -41,10 +43,22 @@
       <file leaf-file-name="time.spec.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/test/utils/time.spec.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="2856">
-              <caret line="180" column="19" selection-start-line="180" selection-start-column="19" selection-end-line="180" selection-end-column="19" />
+            <state relative-caret-position="-1637">
+              <caret line="58" lean-forward="true" selection-start-line="58" selection-end-line="58" />
               <folding>
                 <element signature="e#0#199#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="mockstock.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/api/mockstock.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="119">
+              <caret line="7" column="48" selection-start-line="7" selection-start-column="48" selection-end-line="7" selection-end-column="48" />
+              <folding>
+                <element signature="e#0#30#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -111,9 +125,10 @@
       <find>stocks api initialized</find>
       <find>Lane.loadAPI</find>
       <find>Lane.</find>
-      <find>begin</find>
       <find>rollup-plugin-node-resolve</find>
       <find>console.log</find>
+      <find>addDays</find>
+      <find>begin</find>
     </findStrings>
   </component>
   <component name="Git.Settings">
@@ -128,7 +143,6 @@
         <option value="$PROJECT_DIR$/.gitignore" />
         <option value="$PROJECT_DIR$/test/event.spec.js" />
         <option value="$PROJECT_DIR$/src/utils/log.js" />
-        <option value="$PROJECT_DIR$/src/api/mockstock.js" />
         <option value="$PROJECT_DIR$/src/store/index.js" />
         <option value="$PROJECT_DIR$/test/store/store.spec.js" />
         <option value="$PROJECT_DIR$/rollup.conf.js" />
@@ -137,8 +151,9 @@
         <option value="$PROJECT_DIR$/rollup.config.js" />
         <option value="$PROJECT_DIR$/lib/date_fns.min.js" />
         <option value="$PROJECT_DIR$/karma.conf.js" />
-        <option value="$PROJECT_DIR$/test/utils/time.spec.js" />
         <option value="$PROJECT_DIR$/src/utils/time.js" />
+        <option value="$PROJECT_DIR$/test/utils/time.spec.js" />
+        <option value="$PROJECT_DIR$/src/api/mockstock.js" />
       </list>
     </option>
   </component>
@@ -937,7 +952,7 @@
   </component>
   <component name="ProjectFrameBounds">
     <option name="x" value="-7" />
-    <option name="width" value="1067" />
+    <option name="width" value="1114" />
     <option name="height" value="1047" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -992,7 +1007,8 @@
       <workItem from="1531209733995" duration="10952000" />
       <workItem from="1531286744262" duration="18691000" />
       <workItem from="1531360693794" duration="8868000" />
-      <workItem from="1531463336311" duration="1142000" />
+      <workItem from="1531463336311" duration="1209000" />
+      <workItem from="1531535876433" duration="7310000" />
     </task>
     <task id="LOCAL-00001" summary="添加store">
       <created>1531131133335</created>
@@ -1092,20 +1108,28 @@
       <option name="project" value="LOCAL" />
       <updated>1531377834399</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="添加减周、月、季度、年的测试用例">
+      <created>1531475856433</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1531475856433</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="81460000" />
+    <option name="totallyTimeSpent" value="88837000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="0" width="1067" height="1047" extended-state="0" />
+    <frame x="-7" y="0" width="1114" height="1047" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" weight="0.18891917" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="7" side_tool="true" />
+      <window_info anchor="bottom" id="Find" order="1" />
       <window_info anchor="bottom" id="Version Control" order="7" />
       <window_info anchor="bottom" id="Run" order="2" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -1120,13 +1144,12 @@
       <window_info anchor="bottom" id="Messages" order="7" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
-      <window_info anchor="bottom" id="Find" order="1" />
     </layout>
     <layout-to-restore>
+      <window_info anchor="bottom" id="Version Control" order="11" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
       <window_info anchor="bottom" id="Docker" order="8" show_stripe_button="false" />
       <window_info anchor="bottom" id="Inspection" order="6" weight="0.4" />
-      <window_info anchor="bottom" id="Cvs" order="5" weight="0.25" />
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.44868302" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -1134,12 +1157,12 @@
       <window_info anchor="bottom" id="TODO" order="7" />
       <window_info anchor="bottom" id="TypeScript" order="0" />
       <window_info anchor="bottom" id="Run" order="3" />
-      <window_info anchor="bottom" id="Find" order="2" />
+      <window_info anchor="bottom" id="Message" order="1" />
       <window_info anchor="bottom" id="Debug" order="4" weight="0.4" />
       <window_info anchor="bottom" id="Terminal" order="9" visible="true" weight="0.37444934" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
-      <window_info anchor="bottom" id="Version Control" order="11" />
-      <window_info anchor="bottom" id="Message" order="1" />
+      <window_info anchor="bottom" id="Cvs" order="5" weight="0.25" />
+      <window_info anchor="bottom" id="Find" order="2" />
       <window_info anchor="bottom" id="Messages" order="12" />
       <window_info id="Favorites" order="2" side_tool="true" />
     </layout-to-restore>
@@ -1389,13 +1412,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/api/mockstock.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="527">
-          <caret line="36" column="53" selection-start-line="36" selection-start-column="53" selection-end-line="36" selection-end-column="53" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/store/index.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="289">
@@ -1460,10 +1476,20 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/api/mockstock.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="7" column="48" selection-start-line="7" selection-start-column="48" selection-end-line="7" selection-end-column="48" />
+          <folding>
+            <element signature="e#0#30#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/test/utils/time.spec.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2856">
-          <caret line="180" column="19" selection-start-line="180" selection-start-column="19" selection-end-line="180" selection-end-column="19" />
+        <state relative-caret-position="-1637">
+          <caret line="58" lean-forward="true" selection-start-line="58" selection-end-line="58" />
           <folding>
             <element signature="e#0#199#0" expanded="true" />
           </folding>
@@ -1472,8 +1498,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/utils/time.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="280">
-          <caret line="79" column="30" selection-start-line="79" selection-start-column="30" selection-end-line="79" selection-end-column="30" />
+        <state relative-caret-position="86">
+          <caret line="17" lean-forward="true" selection-start-line="17" selection-end-line="17" />
           <folding>
             <element signature="e#0#109#0" expanded="true" />
           </folding>

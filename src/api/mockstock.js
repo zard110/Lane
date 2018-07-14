@@ -23,7 +23,7 @@ export function simpleStockDayProvider(time, count) {
   }]
 
   for(let i = 1; i < count; i++) {
-    const date = addDays(begin, -1 * i)
+    const date = addDays(new Date(begin), -1 * i)
     stocks.unshift({
       date,
       value: i,

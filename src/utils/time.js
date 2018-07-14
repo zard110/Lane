@@ -17,9 +17,15 @@ export function getToday() {
 }
 
 export function addDays(date, count) {
-  const result = new Date(date);
+  const result = date;
   result.setDate(result.getDate() + count);
   return result;
+}
+
+export function addMinutes(date, amount) {
+  const minute = date.getMinutes()
+  date.setMinutes(minute + amount)
+  return date
 }
 
 export function getDate(date) {
@@ -42,13 +48,20 @@ export function formatDay(date) {
   return `${year}-${month}-${day}`
 }
 
-export function formateTime(date) {
+export function formateDayTime(date) {
   const day = formatDay(date)
   const hour = _patch(date.getHours())
   const min = _patch(date.getMinutes())
   const sec = _patch(date.getSeconds())
 
   return `${day} ${hour}:${min}:${sec}`
+}
+
+export function formateHourMinute(date) {
+  const hour = _patch(date.getHours())
+  const min = _patch(date.getMinutes())
+
+  return `${hour}:${min}`
 }
 
 function _patch(str) {
@@ -108,6 +121,62 @@ export function groupDateByMinute(data, amount = 1, accessor = d => d.date) {
 
 
   }
+}
+
+/**
+ * 获取时间范围
+ * @param amount
+ * @param zones
+ *
+ * ['09:30', '09:32'], ['09:40', '09:42'] =>
+ * {
+ *  09:30: '09:31',
+ *  09:31: '09:31',
+ *  09:32: '09:32',
+ *  09:40: '09:41',
+ *  09:41: '09:41',
+ *  09:42: '09:42'
+ *  }
+ */
+export function createTimeGroupZone(amount = 1, ...zones) {
+  const result = {}
+  for (let i = 0, l = zones.length; i < l; i++) {
+    const [begin, end] = zones[i]
+    const beginTime = _parseHourMinute2Time(begin)
+    const endTime = _parseHourMinute2Time(end)
+
+    const now = new Date(beginTime)
+
+    // 计算下一个时间点
+    const nextTime = addMinutes(new Date(beginTime), amount)
+
+    while ((nextTime <= endTime) && (now <= endTime)) {
+      if (now > nextTime) {
+        addMinutes(nextTime, amount)
+      }
+      result[formateHourMinute(now)] = formateHourMinute(nextTime)
+      addMinutes(now, 1)
+    }
+  }
+
+  return result
+}
+
+/**
+ * 假装根据小时和分钟创建Date
+ * @param time
+ * @returns {Date}
+ */
+function _parseHourMinute2Time(time) {
+  const [hour, min, sec] = time.split(':')
+  const today = new Date()
+
+  today.setHours(parseInt(hour) || 0)
+  today.setMinutes(parseInt(min) || 0)
+  today.setSeconds(parseInt(sec) || 0)
+  today.setMilliseconds(0)
+
+  return today
 }
 
 /**
