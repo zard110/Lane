@@ -7,6 +7,9 @@ import {
   subYears,
 } from 'date-fns'
 
+import Log from './log'
+const logger = new Log('Time.js', Log.Warn)
+
 export function getToday() {
   const date = new Date();
   date.setHours(0);
@@ -31,6 +34,7 @@ export function addMinutes(date, amount) {
 export function getDate(date) {
   const result = new Date(date)
   result.setHours(0)
+  result.setMinutes(0)
   result.setSeconds(0)
   result.setMilliseconds(0)
   return result
@@ -48,7 +52,7 @@ export function formatDay(date) {
   return `${year}-${month}-${day}`
 }
 
-export function formateDayTime(date) {
+export function formatDayTime(date) {
   const day = formatDay(date)
   const hour = _patch(date.getHours())
   const min = _patch(date.getMinutes())
@@ -57,7 +61,15 @@ export function formateDayTime(date) {
   return `${day} ${hour}:${min}:${sec}`
 }
 
-export function formateHourMinute(date) {
+export function formatDayHourMinute(date) {
+  const day = formatDay(date)
+  const hour = _patch(date.getHours())
+  const min = _patch(date.getMinutes())
+
+  return `${day} ${hour}:${min}`
+}
+
+export function formatHourMinute(date) {
   const hour = _patch(date.getHours())
   const min = _patch(date.getMinutes())
 
@@ -110,17 +122,61 @@ function groupDateProvider(sub) {
   }
 }
 
+/**
+ * [t1, t2, t3, t4] =>
+ * {
+ *  "2018-03-21 09:35": [t1, t2],
+ *  "2018-03-21 09:40": [t3, t4],
+ * }
+ * @param data
+ * @param amount
+ * @param accessor
+ * @returns {Array}
+ */
 export function groupDateByMinute(data, amount = 1, accessor = d => d.date) {
   if (!data || !data.length) {
-    return []
+    return {}
   }
+
+  const zone = createTimeGroupZone(amount, ['09:30', '11:30'], ['13:00', '15:00'])
+  const result = {}
+
+
+  let nextDate
+  let nextHM
+  let nextKey
 
   for (let i = 0, l = data.length; i < l; i++) {
     const d = data[i]
     const date = accessor(d)
 
+    // hour minute
+    const hm = zone[formatHourMinute(date)]
+    if (!hm) {
+      logger.warn(`${formatHourMinute(date)} has no zone value.`)
+      continue
+    }
 
+    if (
+      !nextDate ||
+      !nextHM ||
+      (date.getDate() > nextDate.getDate()) ||
+      (hm > nextHM)
+    ) {
+      // 没值、超过一天、超过下一个标记都需要重新计算
+      nextHM = hm
+      nextDate = _parseHourMinute2Time(hm, date)
+      nextKey = formatDayHourMinute(nextDate)
+    }
+
+    if (!result[nextKey]) {
+      result[nextKey] = []
+    }
+
+    result[nextKey].push(d)
   }
+
+  return result
 }
 
 /**
@@ -154,7 +210,7 @@ export function createTimeGroupZone(amount = 1, ...zones) {
       if (now > nextTime) {
         addMinutes(nextTime, amount)
       }
-      result[formateHourMinute(now)] = formateHourMinute(nextTime)
+      result[formatHourMinute(now)] = formatHourMinute(nextTime)
       addMinutes(now, 1)
     }
   }
@@ -164,12 +220,13 @@ export function createTimeGroupZone(amount = 1, ...zones) {
 
 /**
  * 假装根据小时和分钟创建Date
+ * @param str
  * @param time
  * @returns {Date}
  */
-function _parseHourMinute2Time(time) {
-  const [hour, min, sec] = time.split(':')
-  const today = new Date()
+function _parseHourMinute2Time(str, time) {
+  const [hour, min, sec] = str.split(':')
+  const today = time ? new Date(time) : new Date()
 
   today.setHours(parseInt(hour) || 0)
   today.setMinutes(parseInt(min) || 0)
