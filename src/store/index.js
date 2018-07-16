@@ -9,6 +9,7 @@ import {
   simpleIndexDBProvider,
   simpleStockDayProvider,
 } from "../api/mockstock";
+
 const MOCK_API = simpleStockDayProvider(new Date(), 100)
 const MOCK_DB = simpleIndexDBProvider()
 
