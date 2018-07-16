@@ -9,8 +9,8 @@ import {
   simpleIndexDBProvider,
   simpleStockDayProvider,
 } from "../api/mockstock";
-const API = simpleStockDayProvider(new Date(), 100)
-const DB = simpleIndexDBProvider()
+const MOCK_API = simpleStockDayProvider(new Date(), 100)
+const MOCK_DB = simpleIndexDBProvider()
 
 let uid = 0;
 
@@ -34,9 +34,9 @@ export default class Store extends Event {
     // 数据索引
     this.index = {}
 
-    this.DB = DB || Store.DB
+    this.DB = DB || MOCK_DB
 
-    this.API = API || Store.API
+    this.API = API || MOCK_API
 
     // 初始化加载数据
     this._initialize()
@@ -69,7 +69,7 @@ export default class Store extends Event {
     let begin, end
 
     // 标记时间大于最后一条数据时间
-    if (Store.needUpdate(last, time)) {
+    if (this.needUpdate(last, time)) {
       end = this.data.length - 1
     } else {
       const item = this.index[time]
@@ -102,7 +102,7 @@ export default class Store extends Event {
    * @private
    */
   _fetch(time, count) {
-    time = Store.parseIndex(time)
+    time = this.parseIndex(time)
     return this.API({
       code: this.code,
       type: this.type,
@@ -122,7 +122,7 @@ export default class Store extends Event {
    */
   _merge(data, update = true) {
     data.forEach(d => {
-      const i = Store.parseIndex(d)
+      const i = this.parseIndex(d)
       this.index[i] = d
     })
 
@@ -148,15 +148,15 @@ export default class Store extends Event {
     }
 
     // 获取标准时间
-    const now =  Store.parseIndex(Lane.getTime())
+    const now =  this.parseIndex(Lane.getTime())
 
     // 本地最后一条数据时间
-    const last = Store.parseIndex(this.data[this.data.length - 1])
+    const last = this.parseIndex(this.data[this.data.length - 1])
 
     // 需要数据的时间
-    const time = Store.parseIndex(obj)
+    const time = this.parseIndex(obj)
 
-    if (Store.needUpdate(last, now)) {
+    if (this.needUpdate(last, now)) {
       // TODO update
     }
 
@@ -190,11 +190,11 @@ export default class Store extends Event {
     })
   }
 
-  static needUpdate(time, now) {
+  needUpdate(time, now) {
     return now >= time
   }
 
-  static parseIndex(obj) {
+  parseIndex(obj) {
     if (!obj) {
       return
     }
@@ -207,5 +207,3 @@ export default class Store extends Event {
   }
 }
 
-Store.DB = DB
-Store.API = API
