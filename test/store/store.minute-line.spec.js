@@ -9,7 +9,6 @@ import {
 } from "../../src/utils/time";
 
 const code = '860326'
-const type = '1m'
 const today = formatDayHourMinute(new Date())
 const begin = '2018-07-08'
 

@@ -73,6 +73,7 @@ export function simpleStockDayProvider(time, count) {
   const stocks = [{
     date: begin,
     value: 0,
+    timestamp: formatDay(begin),
   }]
 
   for(let i = 1; i < count; i++) {
@@ -80,6 +81,7 @@ export function simpleStockDayProvider(time, count) {
     stocks.unshift({
       date,
       value: i,
+      timestamp: formatDay(date),
     })
   }
   logger.debug('stocks api initialized: ', stocks)
