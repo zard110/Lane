@@ -132,7 +132,10 @@ export default class Store extends Event {
 
     // 需要发送 update 事件
     if (update) {
-      this.emit('update', this.data)
+      this.emit('update', {
+        data: this.data,
+        isFinished: this.isFinished
+      })
     }
   }
 

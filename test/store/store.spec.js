@@ -9,15 +9,15 @@ const code = '860326'
 const type = '1d'
 const today = new Date()
 const begin = '2018-07-08'
+
 // 从2018-07-08开始创建10条数据
 const API = simpleStockDayProvider(begin, 10)
 const DB = simpleIndexDBProvider()
 
 describe('Store test', function() {
-  let originalTimeout;
+  const originalTimeout = jasmine.DEFAULT_TIMEOUT_INTERVAL;
 
   beforeEach(function() {
-    originalTimeout = jasmine.DEFAULT_TIMEOUT_INTERVAL;
     jasmine.DEFAULT_TIMEOUT_INTERVAL = 6000;
     DB.clear()
   });
@@ -53,10 +53,10 @@ describe('Store test', function() {
     })
     let result = []
 
-    store.on('update', () => {
+    store.on('update', ({data, isFinished}) => {
       expect(result.length).toBe(0)
-      expect(store.data.length).toBe(1)
-      expect(store.isFinished).toBe(false)
+      expect(data.length).toBe(1)
+      expect(isFinished).toBe(false)
       done()
     })
 
@@ -73,10 +73,10 @@ describe('Store test', function() {
     })
     let result = []
 
-    store.on('update', () => {
+    store.on('update', ({data, isFinished}) => {
       expect(result.length).toBe(0)
-      expect(store.data.length).toBe(10)
-      expect(store.isFinished).toBe(true)
+      expect(data.length).toBe(10)
+      expect(isFinished).toBe(true)
       done()
     })
 
@@ -93,12 +93,12 @@ describe('Store test', function() {
     })
     let result = []
 
-    store.on('update', () => {
+    store.on('update', ({data, isFinished}) => {
       store.off('update')
 
       expect(result.length).toBe(0)
-      expect(store.data.length).toBe(5)
-      expect(store.isFinished).toBe(false)
+      expect(data.length).toBe(5)
+      expect(isFinished).toBe(false)
 
       // 第二次加载会直接返回已有的数据
       result = store.loadMore(begin, 5)
