@@ -95,7 +95,6 @@ describe('分钟Store测试', function() {
 
     let result = []
     store.on('update', ({data, isFinished}) => {
-      console.log(store)
       expect(result.length).toBe(0)
       expect(data.map(d => d.timestamp)).toEqual(['2018-07-08 15:00'])
       expect(isFinished).toBe(false)
@@ -105,6 +104,66 @@ describe('分钟Store测试', function() {
     store.done()
       .then(() => {
         result = store.loadMore(today, 1)
+      })
+  })
+
+  it('通过loadMore方法取光所有的数据', function(done) {
+    const store = new StoreMinuteLine(code, {
+      DB,
+      API,
+    })
+
+    let result = []
+    store.on('update', ({data, isFinished}) => {
+      expect(result.length).toBe(0)
+
+      // 10天的数据量
+      expect(data.length).toBe(241 * 10)
+
+      // 最后一条数据
+      expect(data[data.length - 1].timestamp).toEqual('2018-07-08 15:00')
+
+      // 10天前的第一条数据
+      expect(data[0].timestamp).toEqual('2018-06-29 09:30')
+      expect(isFinished).toBe(true)
+      done()
+    })
+
+    store.done()
+      .then(() => {
+        // 已经超出了10天的数据量
+        result = store.loadMore(today, 5000)
+      })
+  })
+
+  it('DB会保存之前读取的数据', function(done) {
+    const store = new StoreMinuteLine(code, {
+      DB,
+      API,
+    })
+
+    let result = []
+    store.on('update', ({data, isFinished}) => {
+      store.off('update')
+
+      expect(result.length).toBe(0)
+
+      // 10天的数据量
+      expect(data.length).toBe(241 * 10)
+
+      // 10天前的第一条数据
+      result = store.loadMore('2018-06-29 09:32', 10)
+      expect(result.map(d => d.timestamp)).toEqual([
+        '2018-06-29 09:30',
+        '2018-06-29 09:31',
+      ])
+      done()
+    })
+
+    store.done()
+      .then(() => {
+        // 已经超出了10天的数据量
+        result = store.loadMore(today, 5000)
       })
   })
 })
