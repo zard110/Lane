@@ -2,10 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e11a2dcb-9836-45bf-966a-e5cc691d6a09" name="Default" comment="">
-      <change afterPath="$PROJECT_DIR$/test/store/store.day-line.spec.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/api/mockstock.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/api/mockstock.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/store/store.minute-line.spec.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/store/store.minute-line.spec.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/store/store.day-line.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/store/store.day-line.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test/store/store.spec.js" beforeDir="false" afterPath="$PROJECT_DIR$/test/store/store.spec.js" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -19,86 +18,14 @@
     <option name="LAST_RESOLUTION" value="IGNORE" />
   </component>
   <component name="FileEditorManager">
-    <splitter split-orientation="horizontal" split-proportion="0.5">
+    <splitter split-orientation="horizontal" split-proportion="0.53757226">
       <split-first>
         <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-          <file leaf-file-name="mockstock.js" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/api/mockstock.js">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="255">
-                  <caret line="75" column="32" selection-start-line="75" selection-start-column="32" selection-end-line="75" selection-end-column="32" />
-                  <folding>
-                    <element signature="e#0#30#0" expanded="true" />
-                    <element signature="n#!!block;n#simpleIndexDBProvider#0" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="store.minute-line.spec.js" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/test/store/store.minute-line.spec.js">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="187">
-                  <caret line="11" selection-start-line="11" selection-end-line="11" />
-                  <folding>
-                    <element signature="e#0#96#0" expanded="true" />
-                    <element signature="e#136#227#0" />
-                    <element signature="e#1035#1644#0" />
-                    <element signature="e#2353#2363#0" />
-                    <element signature="e#2841#3243#0" />
-                    <element signature="e#3468#3478#0" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="time.spec.js" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/test/utils/time.spec.js">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="595">
-                  <caret line="414" column="28" selection-start-line="414" selection-start-column="28" selection-end-line="414" selection-end-column="28" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="time.js" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/utils/time.js">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="884">
-                  <caret line="226" column="6" selection-start-line="226" selection-end-line="226" selection-end-column="6" />
-                  <folding>
-                    <element signature="e#0#109#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="index.js" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/store/index.js">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="194">
-                  <caret line="115" column="3" lean-forward="true" selection-start-line="115" selection-start-column="3" selection-end-line="115" selection-end-column="3" />
-                  <folding>
-                    <element signature="e#0#32#0" expanded="true" />
-                  </folding>
-                </state>
-              </provider>
-            </entry>
-          </file>
           <file leaf-file-name="store.day-line.js" pinned="false" current-in-tab="false">
             <entry file="file://$PROJECT_DIR$/src/store/store.day-line.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="51">
-                  <caret line="3" column="11" lean-forward="true" selection-start-line="3" selection-start-column="11" selection-end-line="3" selection-end-column="11" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="store.minute-line.js" pinned="false" current-in-tab="false">
-            <entry file="file://$PROJECT_DIR$/src/store/store.minute-line.js">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="221">
-                  <caret line="13" column="14" selection-start-line="13" selection-start-column="14" selection-end-line="13" selection-end-column="14" />
+                <state relative-caret-position="408">
+                  <caret line="24" column="12" lean-forward="true" selection-start-line="24" selection-start-column="12" selection-end-line="24" selection-end-column="12" />
                   <folding>
                     <element signature="e#0#27#0" expanded="true" />
                   </folding>
@@ -106,23 +33,11 @@
               </provider>
             </entry>
           </file>
-          <file leaf-file-name="store.spec.js" pinned="false" current-in-tab="false">
+          <file leaf-file-name="store.spec.js" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/test/store/store.spec.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="510">
-                  <caret line="30" lean-forward="true" selection-start-line="30" selection-end-line="30" />
-                </state>
-              </provider>
-            </entry>
-          </file>
-          <file leaf-file-name="store.day-line.spec.js" pinned="false" current-in-tab="true">
-            <entry file="file://$PROJECT_DIR$/test/store/store.day-line.spec.js">
-              <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="646">
-                  <caret line="114" selection-start-line="114" selection-end-line="114" />
-                  <folding>
-                    <element signature="e#0#50#0" expanded="true" />
-                  </folding>
+                <state relative-caret-position="442">
+                  <caret line="26" column="14" selection-start-line="26" selection-start-column="14" selection-end-line="26" selection-end-column="14" />
                 </state>
               </provider>
             </entry>
@@ -131,13 +46,34 @@
       </split-first>
       <split-second>
         <leaf>
+          <file leaf-file-name="store.day-line.js" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/store/store.day-line.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="51">
+                  <caret line="13" column="11" selection-start-line="13" selection-start-column="11" selection-end-line="13" selection-end-column="11" />
+                </state>
+              </provider>
+            </entry>
+          </file>
           <file leaf-file-name="index.js" pinned="false" current-in-tab="true">
             <entry file="file://$PROJECT_DIR$/src/store/index.js">
               <provider selected="true" editor-type-id="text-editor">
-                <state relative-caret-position="289">
-                  <caret line="17" column="36" selection-start-line="17" selection-start-column="36" selection-end-line="17" selection-end-column="36" />
+                <state relative-caret-position="476">
+                  <caret line="39" lean-forward="true" selection-start-line="39" selection-end-line="39" />
                   <folding>
                     <element signature="e#0#32#0" expanded="true" />
+                  </folding>
+                </state>
+              </provider>
+            </entry>
+          </file>
+          <file leaf-file-name="store.minute-line.js" pinned="false" current-in-tab="false">
+            <entry file="file://$PROJECT_DIR$/src/store/store.minute-line.js">
+              <provider selected="true" editor-type-id="text-editor">
+                <state relative-caret-position="493">
+                  <caret line="29" column="26" selection-start-line="29" selection-start-column="16" selection-end-line="29" selection-end-column="26" />
+                  <folding>
+                    <element signature="e#0#27#0" expanded="true" />
                   </folding>
                 </state>
               </provider>
@@ -191,12 +127,12 @@
         <option value="$PROJECT_DIR$/src/store/store.day.js" />
         <option value="$PROJECT_DIR$/src/utils/time.js" />
         <option value="$PROJECT_DIR$/src/store/store.minute-line.js" />
-        <option value="$PROJECT_DIR$/src/store/store.day-line.js" />
-        <option value="$PROJECT_DIR$/src/store/index.js" />
-        <option value="$PROJECT_DIR$/test/store/store.spec.js" />
         <option value="$PROJECT_DIR$/test/store/store.minute-line.spec.js" />
         <option value="$PROJECT_DIR$/src/api/mockstock.js" />
         <option value="$PROJECT_DIR$/test/store/store.day-line.spec.js" />
+        <option value="$PROJECT_DIR$/src/store/store.day-line.js" />
+        <option value="$PROJECT_DIR$/test/store/store.spec.js" />
+        <option value="$PROJECT_DIR$/src/store/index.js" />
       </list>
     </option>
   </component>
@@ -993,9 +929,9 @@
   <component name="PackageJsonUpdateNotifier">
     <dismissed value="$PROJECT_DIR$/package.json" />
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds">
     <option name="x" value="-7" />
-    <option name="width" value="1231" />
+    <option name="width" value="1227" />
     <option name="height" value="1047" />
   </component>
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -1107,7 +1043,7 @@
       <workItem from="1531463336311" duration="1209000" />
       <workItem from="1531535876433" duration="12675000" />
       <workItem from="1531724111791" duration="5352000" />
-      <workItem from="1531795383397" duration="14771000" />
+      <workItem from="1531795383397" duration="15394000" />
     </task>
     <task id="LOCAL-00001" summary="添加store">
       <created>1531131133335</created>
@@ -1263,17 +1199,24 @@
       <option name="project" value="LOCAL" />
       <updated>1531813561482</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="完善测试数据">
+      <created>1531827085374</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1531827085374</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="114325000" />
+    <option name="totallyTimeSpent" value="114948000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-8" y="-8" width="1936" height="1056" extended-state="6" />
+    <frame x="-7" y="0" width="1227" height="1047" extended-state="0" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.13006397" />
+      <window_info content_ui="combo" id="Project" order="0" weight="0.20836891" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" />
@@ -1335,7 +1278,8 @@
     <MESSAGE value="添加模拟分时数据" />
     <MESSAGE value="修改 Store update 事件返回数据结果结构" />
     <MESSAGE value="添加分钟k线的测试用例" />
-    <option name="LAST_COMMIT_MESSAGE" value="添加分钟k线的测试用例" />
+    <MESSAGE value="完善测试数据" />
+    <option name="LAST_COMMIT_MESSAGE" value="完善测试数据" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/package.json">
@@ -1598,33 +1542,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/store/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="194">
-          <caret line="115" column="3" lean-forward="true" selection-start-line="115" selection-start-column="3" selection-end-line="115" selection-end-column="3" />
-          <folding>
-            <element signature="e#0#32#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/test/store/store.spec.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="510">
-          <caret line="30" lean-forward="true" selection-start-line="30" selection-end-line="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/store/store.minute-line.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="221">
-          <caret line="13" column="14" selection-start-line="13" selection-start-column="14" selection-end-line="13" selection-end-column="14" />
-          <folding>
-            <element signature="e#0#27#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/test/utils/time.spec.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="595">
@@ -1640,13 +1557,6 @@
             <element signature="e#0#30#0" expanded="true" />
             <element signature="n#!!block;n#simpleIndexDBProvider#0" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/store/store.day-line.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="51">
-          <caret line="3" column="11" lean-forward="true" selection-start-line="3" selection-start-column="11" selection-end-line="3" selection-end-column="11" />
         </state>
       </provider>
     </entry>
@@ -1667,10 +1577,44 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/test/store/store.day-line.spec.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="646">
-          <caret line="114" selection-start-line="114" selection-end-line="114" />
+        <state relative-caret-position="1445">
+          <caret line="85" lean-forward="true" selection-start-line="85" selection-end-line="85" />
           <folding>
             <element signature="e#0#50#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/store/store.minute-line.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="493">
+          <caret line="29" column="26" selection-start-line="29" selection-start-column="16" selection-end-line="29" selection-end-column="26" />
+          <folding>
+            <element signature="e#0#27#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/store/store.day-line.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="13" column="11" selection-start-line="13" selection-start-column="11" selection-end-line="13" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/test/store/store.spec.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="442">
+          <caret line="26" column="14" selection-start-line="26" selection-start-column="14" selection-end-line="26" selection-end-column="14" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/store/index.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="476">
+          <caret line="39" lean-forward="true" selection-start-line="39" selection-end-line="39" />
+          <folding>
+            <element signature="e#0#32#0" expanded="true" />
           </folding>
         </state>
       </provider>

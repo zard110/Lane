@@ -7,16 +7,15 @@ import {
 
 import {
   simpleIndexDBProvider,
-  simpleStockDayProvider,
 } from "../api/mockstock";
 
-const MOCK_API = simpleStockDayProvider(new Date(), 100)
+
 const MOCK_DB = simpleIndexDBProvider()
 
 let uid = 0;
 
 export default class Store extends Event {
-  constructor(code, type, {DB, API} = {}) {
+  constructor(code, type, options = {}) {
     super()
 
     this.id = ++uid
@@ -35,9 +34,9 @@ export default class Store extends Event {
     // 数据索引
     this.index = {}
 
-    this.DB = DB || MOCK_DB
+    this.DB = options.DB || MOCK_DB
 
-    this.API = API || MOCK_API
+    this.options = options
 
     // 初始化加载数据
     this._initialize()
@@ -199,15 +198,7 @@ export default class Store extends Event {
   }
 
   parseIndex(obj) {
-    if (!obj) {
-      return
-    }
-
-    if (typeof obj === 'string') {
-      return obj
-    }
-
-    return formatDay(obj instanceof Date ? obj : obj.date)
+    return obj
   }
 }
 
