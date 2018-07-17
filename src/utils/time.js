@@ -131,7 +131,7 @@ function groupDateProvider(sub) {
  * @param data
  * @param amount
  * @param accessor
- * @returns {Array}
+ * @returns {Object}
  */
 export function groupDateByMinute(data, amount = 1, accessor = d => d.date) {
   if (!data || !data.length) {
@@ -165,7 +165,7 @@ export function groupDateByMinute(data, amount = 1, accessor = d => d.date) {
     ) {
       // 没值、超过一天、超过下一个标记都需要重新计算
       nextHM = hm
-      nextDate = _parseHourMinute2Time(hm, date)
+      nextDate = parseHourMinute2Time(hm, date)
       nextKey = formatDayHourMinute(nextDate)
     }
 
@@ -198,8 +198,8 @@ export function createTimeGroupZone(amount = 1, ...zones) {
   const result = {}
   for (let i = 0, l = zones.length; i < l; i++) {
     const [begin, end] = zones[i]
-    const beginTime = _parseHourMinute2Time(begin)
-    const endTime = _parseHourMinute2Time(end)
+    const beginTime = parseHourMinute2Time(begin)
+    const endTime = parseHourMinute2Time(end)
 
     const now = new Date(beginTime)
 
@@ -224,7 +224,7 @@ export function createTimeGroupZone(amount = 1, ...zones) {
  * @param time
  * @returns {Date}
  */
-function _parseHourMinute2Time(str, time) {
+export function parseHourMinute2Time(str, time) {
   const [hour, min, sec] = str.split(':')
   const today = time ? new Date(time) : new Date()
 

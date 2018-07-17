@@ -3,9 +3,62 @@ import {
   addDays,
   formatDay,
   getDate,
+  createTimeGroupZone,
+  parseHourMinute2Time,
+  formatDayHourMinute,
 } from "../utils/time";
 
 const logger = new Log('mockstock.js', Log.Error)
+
+export function simpleStockDayTimeProvider(date = new Date(), days = 10, ...zones) {
+  const stocks = []
+  const timeZone = createTimeGroupZone.apply(null, [1].concat(zones))
+  const timeKeys = Object.keys(timeZone)
+
+  let value = 0
+  while(days) {
+    for (let i = timeKeys.length - 1; i >= 0; i--) {
+      const time = parseHourMinute2Time(timeKeys[i], date)
+      stocks.unshift({
+        date: time,
+        value: value++,
+        timestamp: formatDayHourMinute(time),
+      })
+    }
+
+    days--
+    date = addDays(date, -1)
+  }
+
+  logger.debug('stocks api initialized:', stocks.map(d => {
+    return {
+      value: d.value,
+      date: d.timestamp,
+    }
+  }))
+
+  return ({code, type, time, count}) => {
+    const last = formatDayHourMinute(stocks[stocks.length - 1].date)
+    let begin, end
+
+    if (time > last) {
+      begin = stocks.length - count
+      end = stocks.length
+    } else {
+      const d = stocks.filter(s => formatDayHourMinute(s.date) === time)
+      end = stocks.indexOf(d[0])
+      begin = end - count
+    }
+
+    const data = stocks.slice(begin < 0 ? 0 : begin, end)
+    const isFinished = data.length < count
+
+    return new Promise(resolve => resolve({
+      data,
+      isFinished,
+    }))
+  }
+}
 
 /**
  * 模拟日线股票生成器
