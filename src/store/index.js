@@ -2,10 +2,6 @@ import Lane from '../lane/index'
 import Event from '../utils/event'
 
 import {
-  formatDay,
-} from '../utils/time'
-
-import {
   simpleIndexDBProvider,
 } from "../api/mockstock";
 
@@ -39,7 +35,7 @@ export default class Store extends Event {
     this.options = options
 
     // 初始化加载数据
-    this._initialize()
+    this._initialize(options)
   }
 
   /**
@@ -117,20 +113,24 @@ export default class Store extends Event {
   /**
    * 合并数据
    * @param data
-   * @param update
+   * @param needUpdate
+   * @param needSave
    * @private
    */
-  _merge(data, update = true) {
+  _merge(data, needUpdate = true, needSave = true) {
     data.forEach(d => {
       const i = this.parseIndex(d)
       this.index[i] = d
     })
 
     this.data = Object.values(this.index)
-    this._save(this.data)
+
+    if (needSave) {
+      this._save(this.data)
+    }
 
     // 需要发送 update 事件
-    if (update) {
+    if (needUpdate) {
       this.emit('update', {
         data: this.data,
         isFinished: this.isFinished
@@ -164,13 +164,14 @@ export default class Store extends Event {
     }
 
     const result = this._load(time, count, last)
+    let fetchResult
 
     // 如果数据不够，从后台取数据
     if (!this.isFinished && result.length < count) {
-      this._fetch(result[0] || time, count - result.length)
+      fetchResult = this._fetch(result[0] || time, count - result.length)
     }
 
-    return result
+    return (fetchResult instanceof Array) ? fetchResult.concat(result) : result
   }
 
   /**

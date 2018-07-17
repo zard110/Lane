@@ -33,7 +33,6 @@ describe('日Store测试', function() {
     let result = []
 
     store.on('update', ({data, isFinished}) => {
-      console.log(data)
       expect(result.length).toBe(0)
       expect(data.map(d => d.timestamp)).toEqual(['2018-07-08'])
       expect(isFinished).toBe(false)
