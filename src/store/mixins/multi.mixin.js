@@ -34,7 +34,13 @@ export default {
       this.isFinished = isFinished
 
       if (data.length) {
-        this._merge(data, true, false)
+        // 分组
+        const groupData = this.group(data)
+
+        // 合并
+        const result = this.assemble(groupData)
+
+        this._merge(result, true, false)
       }
     })
   },
@@ -50,12 +56,20 @@ export default {
     time = this.parseIndex(time)
     const store = this.store
 
-    const result = store.loadMore(time, this.getDayCount(count))
+    const data = store.loadMore(time, this.getDayCount(count))
 
-    if (result.length) {
-      this._merge(result, true, false)
+    if (data.length) {
+      // 分组
+      const groupData = this.group(data)
+
+      // 合并
+      const result = this.assemble(groupData)
+
+      if (result.length) {
+        this._merge(result, true, false)
+      }
+
+      return result
     }
-
-    return result
   }
 }

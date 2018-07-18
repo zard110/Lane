@@ -1,11 +1,14 @@
 import Store from './store.minute-line'
 import MultiMixin from './mixins/multi.mixin'
+import {
+  groupDateByMinute
+} from "../utils/time";
 
 const MinuteCounts = {
   m: 1,
 }
 
-export default class StoreDayLineMulti extends Store {
+export default class StoreMinuteLineMulti extends Store {
   constructor(options) {
     super(options)
 
@@ -46,5 +49,18 @@ export default class StoreDayLineMulti extends Store {
 
     this.count = count
     this.unit = unit
+  }
+
+  group(data) {
+    return groupDateByMinute(data, this.count)
+  }
+
+  assemble(data) {
+    // FIXME 简单mock
+    const keys = Object.keys(data)
+    return keys.map(k => {
+      const times = data[k]
+      return times[times.length - 1]
+    })
   }
 }

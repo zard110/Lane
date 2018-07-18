@@ -1,5 +1,6 @@
 import Store from './store.day-line'
 import MultiMixin from './mixins/multi.mixin'
+import {groupDateByMonth, groupDateBySeason, groupDateByWeek, groupDateByYear} from "../utils/time";
 
 const DayCounts = {
   W: 7,
@@ -49,5 +50,28 @@ export default class StoreDayLineMulti extends Store {
 
     this.count = count
     this.unit = unit
+  }
+
+  group(data) {
+    const count = this.count
+    const unit = this.unit
+
+    switch (unit) {
+      case 'W':
+        return groupDateByWeek(data, count)
+      case 'M':
+        return groupDateByMonth(data, count)
+      case 'S':
+        return groupDateBySeason(data, count)
+      case 'Y':
+        return groupDateByYear(data, count)
+      default:
+        return []
+    }
+  }
+
+  assemble(data) {
+    // FIXME 简单mock
+    return data.map(d => d[d.length - 1])
   }
 }

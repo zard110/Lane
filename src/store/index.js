@@ -104,9 +104,9 @@ export default class Store extends Event {
       code: this.code,
       type: this.type,
       count,
-      time
+      time,
     }).then(({data, isFinished}) => {
-      this.isFinished = isFinished
+      this.isFinished = this.isFinished || isFinished
       return this._merge(data)
     })
   }
