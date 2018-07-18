@@ -34,8 +34,8 @@ describe('Event test', function() {
     event.off('update')
     event.emit('update', 123)
 
-    expect(cb1).nothing(123)
-    expect(cb2).nothing()
+    expect(cb1).not.toHaveBeenCalled()
+    expect(cb2).not.toHaveBeenCalled()
   })
 
   it('可以删除指定事件', function() {
@@ -49,6 +49,47 @@ describe('Event test', function() {
     event.emit('update', 123)
 
     expect(cb1).toHaveBeenCalledWith(123)
-    expect(cb2).nothing()
+    expect(cb2).not.toHaveBeenCalled()
+  })
+
+  it('可以添加事件修饰符', function() {
+    const event = new Event()
+    const cb1 = jasmine.createSpy()
+    const cb2 = jasmine.createSpy()
+
+    event.on('update.1', cb1)
+    event.on('update.2', cb2)
+    event.emit('update', 123)
+
+    expect(cb1).toHaveBeenCalledWith(123)
+    expect(cb2).toHaveBeenCalledWith(123)
+  })
+
+  it('可以删除指定事件修饰符', function() {
+    const event = new Event()
+    const cb1 = jasmine.createSpy()
+    const cb2 = jasmine.createSpy()
+
+    event.on('update.1', cb1)
+    event.on('update.2', cb2)
+    event.off('update.1')
+    event.emit('update', 123)
+
+    expect(cb1).not.toHaveBeenCalled()
+    expect(cb2).toHaveBeenCalledWith(123)
+  })
+
+  it('可以删除全部事件修饰符', function() {
+    const event = new Event()
+    const cb1 = jasmine.createSpy()
+    const cb2 = jasmine.createSpy()
+
+    event.on('update.1', cb1)
+    event.on('update.2', cb2)
+    event.off('update')
+    event.emit('update', 123)
+
+    expect(cb1).not.toHaveBeenCalled()
+    expect(cb2).not.toHaveBeenCalled()
   })
 })
