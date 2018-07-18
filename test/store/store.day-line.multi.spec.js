@@ -35,7 +35,7 @@ describe('多日Store测试', function() {
 
     store.done()
       .then(() => {
-        store.loadMore('2099-01-01', 100)
+        store.loadMore('2099-01-01', 1)
         done()
       })
   })

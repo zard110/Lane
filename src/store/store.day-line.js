@@ -9,13 +9,14 @@ import {
 } from "../utils/time";
 
 const MOCK_API = simpleStockDayProvider(new Date(), 100)
+const ONE_DAY = '1D'
 
 /**
  * 日线 Store
  */
 export default class StoreDayLine extends Store {
   constructor(options = {}) {
-    options.type = options.type || '1D'
+    options.type = options.type || ONE_DAY
     super(options)
     this.API = options.API || MOCK_API
   }
@@ -33,3 +34,5 @@ export default class StoreDayLine extends Store {
     return formatDay(obj instanceof Date ? obj : obj.date)
   }
 }
+
+StoreDayLine.Type = ONE_DAY

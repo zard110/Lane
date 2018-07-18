@@ -1,11 +1,8 @@
-import Store from './store.day-line'
+import Store from './store.minute-line'
 import MultiMixin from './mixins/multi.mixin'
 
-const DayCounts = {
-  W: 7,
-  M: 30,
-  S: 120,
-  Y: 365,
+const MinuteCounts = {
+  m: 1,
 }
 
 export default class StoreDayLineMulti extends Store {
@@ -17,21 +14,21 @@ export default class StoreDayLineMulti extends Store {
   }
 
   getDayCount(count) {
-    // 需要的数据条数 × 单位条数 × 单位对应的天数
-    return count * this.count * DayCounts[this.unit]
+    // 需要的数据条数 × 单位条数
+    return count * this.count
   }
 
   parseStore(store) {
     if (!store) {
-      throw new Error('多日的Store依赖于单日的Store')
+      throw new Error('多分钟的Store依赖于单分钟的Store')
     }
 
     if (store.code !== this.code) {
-      throw new Error(`单日code: ${store.code} 和本身code: ${this.code} 不相等`)
+      throw new Error(`单分钟code: ${store.code} 和本身code: ${this.code} 不相等`)
     }
 
     if (store.type !== Store.Type) {
-      throw new Error(`单日type必须为 ${Store.Type}`)
+      throw new Error(`单分钟type必须为 ${Store.Type}`)
     }
 
     this._attachStoreEvent(store)
@@ -43,8 +40,8 @@ export default class StoreDayLineMulti extends Store {
     const count = parseInt(period)
     const unit = period.replace(count, '')
 
-    if (isNaN(count) || !DayCounts[unit]) {
-      throw new Error(`${period} 不是一个正确的周期（1W 1M 1S 1Y）`)
+    if (isNaN(count) || !MinuteCounts[unit]) {
+      throw new Error(`${period} 不是一个正确的周期（1m）`)
     }
 
     this.count = count

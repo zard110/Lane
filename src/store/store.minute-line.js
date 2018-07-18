@@ -6,14 +6,15 @@ import {
 
 import {formatDayHourMinute} from "../utils/time";
 
-const Mock_API = simpleStockDayTimeProvider(new Date(), 10)
+const Mock_API = simpleStockDayTimeProvider(new Date(), 10, ['09:30', '11:30'], ['13:01', '15:00'])
+const ONE_MINUTE = '1m'
 
 /**
  * 日线 Store
  */
 export default class StoreMinuteLine extends Store {
   constructor(options = {}) {
-    options.type = options.type || '1m'
+    options.type = options.type || ONE_MINUTE
     super(options)
     this.API = options.API || Mock_API
   }
@@ -31,3 +32,4 @@ export default class StoreMinuteLine extends Store {
     return formatDayHourMinute(obj instanceof Date ? obj : obj.date)
   }
 }
+StoreMinuteLine.Type = ONE_MINUTE
