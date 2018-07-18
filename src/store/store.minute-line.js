@@ -12,9 +12,9 @@ const Mock_API = simpleStockDayTimeProvider(new Date(), 10)
  * 日线 Store
  */
 export default class StoreMinuteLine extends Store {
-  constructor(code, options = {}) {
-    super(code, '1m', options)
-
+  constructor(options = {}) {
+    options.type = options.type || '1m'
+    super(options)
     this.API = options.API || Mock_API
   }
 

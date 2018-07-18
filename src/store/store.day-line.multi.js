@@ -7,22 +7,21 @@ const DayCounts = {
   Y: 365,
 }
 
-const OneDay = '1d'
+const OneDay = '1D'
 
 export default class StoreDayLineMulti extends Store {
-  constructor(code, period, options) {
-    super(code, period, options)
-
-    this.parseStore(options.store)
-
-    this.parsePeriod(period)
+  constructor(options) {
+    super(options)
   }
 
   /**
    * 初始化
    * @private
    */
-  _initialize(options) {
+  _initialize() {
+    const options = this.options
+    this.parseStore(options.store)
+    this.parsePeriod(options.type)
     this.loading = true
     const store = options.store
     return store.done()
@@ -36,9 +35,11 @@ export default class StoreDayLineMulti extends Store {
     time = this.parseIndex(time)
     const store = this.store
 
-    const result = store(time, this.getDayCount())
+    const result = store.loadMore(time, this.getDayCount(count))
 
-    this._merge(result, true, false)
+    if (result.length) {
+      this._merge(result, true, false)
+    }
 
     return result
   }
@@ -61,10 +62,15 @@ export default class StoreDayLineMulti extends Store {
       throw new Error(`单日type必须为 ${OneDay}`)
     }
 
-    store.on('update', ({data, isFinished}) => {
+    store.on(`update.store_${this.id}`, ({data, isFinished}) => {
       this.isFinished = isFinished
-      this._merge(data, true, false)
+
+      if (data.length) {
+        this._merge(data, true, false)
+      }
     })
+
+    this.store = store
   }
 
   parsePeriod(period) {

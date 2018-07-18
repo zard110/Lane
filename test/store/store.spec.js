@@ -7,7 +7,7 @@ describe('Store test', function() {
   const originalTimeout = jasmine.DEFAULT_TIMEOUT_INTERVAL;
 
   beforeEach(function() {
-    jasmine.DEFAULT_TIMEOUT_INTERVAL = 6000;
+    jasmine.DEFAULT_TIMEOUT_INTERVAL = 600;
   });
 
   afterEach(function() {
@@ -15,12 +15,18 @@ describe('Store test', function() {
   });
 
   it('刚实例化的Store处于loading状态', function() {
-    const store = new Store(code, type)
+    const store = new Store({
+      code,
+      type,
+    })
     expect(store.loading).toBe(true)
   })
 
   it('通过done方法确认Store实例已经初始化完成', function(done) {
-    const store = new Store(code,type)
+    const store = new Store({
+      code,
+      type,
+    })
     store.done()
       .then(() => {
         expect(store.loading).toBe(false)

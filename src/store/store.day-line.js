@@ -14,9 +14,9 @@ const MOCK_API = simpleStockDayProvider(new Date(), 100)
  * 日线 Store
  */
 export default class StoreDayLine extends Store {
-  constructor(code, options = {}) {
-    super(code, '1d', options)
-
+  constructor(options = {}) {
+    options.type = options.type || '1D'
+    super(options)
     this.API = options.API || MOCK_API
   }
 

@@ -20,7 +20,7 @@ describe('分钟Store测试', function() {
   const originalTimeout = jasmine.DEFAULT_TIMEOUT_INTERVAL
 
   beforeEach(function() {
-    jasmine.DEFAULT_TIMEOUT_INTERVAL = 6000
+    jasmine.DEFAULT_TIMEOUT_INTERVAL = 600
     DB.clear()
   })
 
@@ -87,7 +87,8 @@ describe('分钟Store测试', function() {
   })
 
   it('通过loadMore方法获取正确的数据', function(done) {
-    const store = new StoreMinuteLine(code, {
+    const store = new StoreMinuteLine({
+      code,
       DB,
       API,
     })
@@ -107,7 +108,8 @@ describe('分钟Store测试', function() {
   })
 
   it('通过loadMore方法取光所有的数据', function(done) {
-    const store = new StoreMinuteLine(code, {
+    const store = new StoreMinuteLine({
+      code,
       DB,
       API,
     })
@@ -136,7 +138,8 @@ describe('分钟Store测试', function() {
   })
 
   it('DB会保存之前读取的数据', function(done) {
-    const store = new StoreMinuteLine(code, {
+    const store = new StoreMinuteLine({
+      code,
       DB,
       API,
     })

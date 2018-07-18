@@ -11,15 +11,15 @@ const MOCK_DB = simpleIndexDBProvider()
 let uid = 0;
 
 export default class Store extends Event {
-  constructor(code, type, options = {}) {
+  constructor(options = {}) {
     super()
 
     this.id = ++uid
-    this.code = code
-    this.type = type
+    this.code = options.code
+    this.type = options.type
 
     // 正在加载数据
-    this.loading = false
+    this.loading = true
 
     // 已经加载完全部数据
     this.isFinished = false
@@ -35,16 +35,17 @@ export default class Store extends Event {
     this.options = options
 
     // 初始化加载数据
-    this._initialize(options)
+    // this._initialize(options)
   }
 
   /**
    * 初始化
    * @private
+   * @returns {Promise<any>}
    */
   _initialize() {
     this.loading = true
-    this.DB.load({
+    return this.DB.load({
       code: this.code,
       type: this.type,
     })
@@ -179,19 +180,21 @@ export default class Store extends Event {
    * @returns {Promise<any>}
    */
   done() {
-    return new Promise(resolve => {
-      function check() {
-        setTimeout(() => {
-          if (!this.loading) {
-            resolve()
-          } else {
-            check.call(this)
-          }
-        }, 10)
-      }
+    // return new Promise(resolve => {
+    //   function check() {
+    //     setTimeout(() => {
+    //       if (!this.loading) {
+    //         resolve()
+    //       } else {
+    //         check.call(this)
+    //       }
+    //     }, 10)
+    //   }
+    //
+    //   check.call(this)
+    // })
 
-      check.call(this)
-    })
+    return this._initialize()
   }
 
   needUpdate(time, now) {

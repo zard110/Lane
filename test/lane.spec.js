@@ -15,7 +15,10 @@ describe('Lane test', function() {
   it('可以添加、获取Store', function() {
     const lane = new Lane()
     lane.clear()
-    const store = new Store(code, type)
+    const store = new Store({
+      code,
+      type,
+    })
 
     lane.add(store)
     expect(lane.get(code, type)).toBe(store)
@@ -24,7 +27,10 @@ describe('Lane test', function() {
   it('添加Store后有正确的数据结构', function() {
     const lane = new Lane()
     lane.clear()
-    const store = new Store(code, type)
+    const store = new Store({
+      code,
+      type,
+    })
 
     lane.add(store)
     const stores = lane.stores
@@ -34,7 +40,10 @@ describe('Lane test', function() {
   it('不能添加重复code、type的Store', function() {
     const lane = new Lane()
     lane.clear()
-    const store = new Store(code, type)
+    const store = new Store({
+      code,
+      type,
+    })
 
     lane.add(store)
     expect(() => lane.add(store)).toThrowError()
