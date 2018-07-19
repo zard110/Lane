@@ -76,6 +76,12 @@ export function formatHourMinute(date) {
   return `${hour}:${min}`
 }
 
+export function isSameDay(one, other) {
+  return (one.getDate() !== other.getDate()) &&
+    (one.getMonth() !== other.getMonth()) &&
+  (one.getFullYear() !== other.getFullYear())
+}
+
 function _patch(str) {
   str += ''
   return str.length === 1 ? `0${str}` : str
@@ -160,7 +166,7 @@ export function groupDateByMinute(data, amount = 1, accessor = d => d.date) {
     if (
       !nextDate ||
       !nextHM ||
-      (date.getDate() > nextDate.getDate()) ||
+      (!isSameDay(date, nextDate)) ||
       (hm > nextHM)
     ) {
       // 没值、超过一天、超过下一个标记都需要重新计算

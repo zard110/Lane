@@ -421,4 +421,26 @@ describe('Time test', function () {
       ['2018-07-15 09:41:00'],
     ])
   })
+
+  it('能够正确跨月、年分组', function() {
+    const data = [
+      '2017-03-14 09:30:00',
+      '2018-04-14 09:30:00',
+      '2018-08-14 09:30:00',
+    ].map(d => {
+      return {
+        date: new Date(d),
+        value: d,
+      }
+    })
+
+    const result = groupDateByMinute(data, 60)
+    const keys = Object.keys(result)
+
+    expect(keys).toEqual([
+      "2017-03-14 10:30",
+      "2018-04-14 10:30",
+      "2018-08-14 10:30",
+    ])
+  })
 })
