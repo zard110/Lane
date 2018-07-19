@@ -9,12 +9,22 @@ const DayCounts = {
   Y: 365,
 }
 
+export function mockAssemble(data) {
+  if (!data || !data.length) {
+    return {}
+  }
+
+  return data[data.length - 1]
+}
+
 export default class StoreDayLineMulti extends Store {
   constructor(options) {
     super(options)
 
     // 添加处理多Store的方法
     Object.assign(this, MultiMixin)
+
+    this.assembleData = options.assembleData || mockAssemble
   }
 
   getDayCount(count) {
@@ -74,6 +84,6 @@ export default class StoreDayLineMulti extends Store {
 
   assemble(data) {
     // FIXME 简单mock
-    return data.map(d => d[d.length - 1])
+    return data.map(d => this.assembleData(d))
   }
 }

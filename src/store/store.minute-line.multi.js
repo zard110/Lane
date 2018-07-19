@@ -8,12 +8,22 @@ const MinuteCounts = {
   m: 1,
 }
 
+export function mockAssemble(time, data) {
+  if (!data || !data.length) {
+    return {}
+  }
+
+  return data[data.length - 1]
+}
+
 export default class StoreMinuteLineMulti extends Store {
   constructor(options) {
     super(options)
 
     // 添加处理多Store的方法
     Object.assign(this, MultiMixin)
+
+    this.assembleData = options.assembleData || mockAssemble
   }
 
   getDayCount(count) {
@@ -58,9 +68,6 @@ export default class StoreMinuteLineMulti extends Store {
   assemble(data) {
     // FIXME 简单mock
     const keys = Object.keys(data)
-    return keys.map(k => {
-      const times = data[k]
-      return times[times.length - 1]
-    })
+    return keys.map(k => this.assembleData(k, data[k]))
   }
 }

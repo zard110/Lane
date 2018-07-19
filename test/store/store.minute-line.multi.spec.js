@@ -11,6 +11,14 @@ const code = '860326'
 const API = simpleStockDayTimeProvider(begin, 10)
 const DB = simpleIndexDBProvider()
 
+function assembleData(time, data) {
+  if (!data || !data.length) {
+    return {}
+  }
+
+  return data[data.length - 1]
+}
+
 describe('多分钟Store测试', function() {
   const originalTimeout = jasmine.DEFAULT_TIMEOUT_INTERVAL;
 
@@ -37,6 +45,7 @@ describe('多分钟Store测试', function() {
       store: oneMinuteStore,
       API,
       DB,
+      assembleData,
     })
 
     store.on('update', ({data, isFinished}) => {
@@ -82,6 +91,7 @@ describe('多分钟Store测试', function() {
       store: oneMinuteStore,
       API,
       DB,
+      assembleData,
     })
 
     store.on('update', ({data, isFinished}) => {
@@ -117,6 +127,7 @@ describe('多分钟Store测试', function() {
       store: oneMinuteStore,
       API,
       DB,
+      assembleData,
     })
 
     store.on('update', ({data, isFinished}) => {
@@ -147,6 +158,7 @@ describe('多分钟Store测试', function() {
       store: oneMinuteStore,
       API,
       DB,
+      assembleData,
     })
 
     store.on('update', ({data, isFinished}) => {

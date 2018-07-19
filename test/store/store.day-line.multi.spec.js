@@ -11,6 +11,14 @@ const begin = '2018-07-08'
 const API = simpleStockDayProvider(begin, 1000)
 const DB = simpleIndexDBProvider()
 
+function assembleData(data) {
+  if (!data || !data.length) {
+    return {}
+  }
+
+  return data[data.length - 1]
+}
+
 describe('多日Store测试', function() {
   const originalTimeout = jasmine.DEFAULT_TIMEOUT_INTERVAL;
 
@@ -36,6 +44,7 @@ describe('多日Store测试', function() {
       store: oneDayStore,
       API,
       DB,
+      assembleData,
     })
 
     store.on('update', ({data, isFinished}) => {
@@ -67,6 +76,7 @@ describe('多日Store测试', function() {
       store: oneDayStore,
       API,
       DB,
+      assembleData,
     })
 
     store.on('update', ({data, isFinished}) => {
@@ -100,6 +110,7 @@ describe('多日Store测试', function() {
       store: oneDayStore,
       API,
       DB,
+      assembleData,
     })
 
     store.on('update', ({data, isFinished}) => {
@@ -133,6 +144,7 @@ describe('多日Store测试', function() {
       store: oneDayStore,
       API,
       DB,
+      assembleData,
     })
 
     store.on('update', ({data, isFinished}) => {
