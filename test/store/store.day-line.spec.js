@@ -25,6 +25,28 @@ describe('日Store测试', function() {
     jasmine.DEFAULT_TIMEOUT_INTERVAL = originalTimeout;
   });
 
+  it('确认模拟数据正确', function(done) {
+    API({
+      time: begin,
+      count: 10,
+    }).then(({data, isFinished}) => {
+      expect(data.map(d => d.timestamp)).toEqual([
+        '2018-06-29',
+        '2018-06-30',
+        '2018-07-01',
+        '2018-07-02',
+        '2018-07-03',
+        '2018-07-04',
+        '2018-07-05',
+        '2018-07-06',
+        '2018-07-07',
+      ])
+      expect(isFinished).toBe(true)
+
+      done()
+    })
+  })
+
   it('通过loadMore方法取数据并触发update事件', function(done) {
     const store = new Store({
       code,
