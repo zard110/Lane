@@ -13,7 +13,7 @@ const today = formatDayHourMinute(new Date())
 const begin = '2018-07-08'
 
 // 从2018-07-08开始创建10天的1分钟k线
-const API = simpleStockDayTimeProvider(new Date(begin), 10)
+const API = simpleStockDayTimeProvider(begin, 10)
 const DB = simpleIndexDBProvider()
 
 describe('分钟Store测试', function() {
@@ -29,7 +29,7 @@ describe('分钟Store测试', function() {
   })
 
   it('能够正确模拟数据', function(done) {
-    const API = simpleStockDayTimeProvider(new Date('2018-07-17'), 1, undefined, ['09:30', '11:30'], ['13:01', '15:00'])
+    const API = simpleStockDayTimeProvider('2018-07-17', 1)
 
     API({
       time: '2018-07-17 09:40',
@@ -53,7 +53,7 @@ describe('分钟Store测试', function() {
   })
 
   it('能够正确模拟数据(跨天)', function(done) {
-    const API = simpleStockDayTimeProvider(new Date('2018-07-17'), 2, undefined, ['09:30', '11:30'], ['13:01', '15:00'])
+    const API = simpleStockDayTimeProvider('2018-07-17', 2)
 
     API({
       time: '2018-07-17 09:40',
