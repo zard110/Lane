@@ -5,7 +5,7 @@ import {groupDateByMonth, groupDateBySeason, groupDateByWeek, groupDateByYear} f
 const DayCounts = {
   W: 7,
   M: 30,
-  S: 120,
+  S: 90,
   Y: 365,
 }
 
@@ -18,6 +18,8 @@ export default class StoreDayLineMulti extends Store {
   }
 
   getDayCount(count) {
+    // TODO 更精准地确定数据条数，现在的数据会多
+
     // 需要的数据条数 × 单位条数 × 单位对应的天数
     return count * this.count * DayCounts[this.unit]
   }
