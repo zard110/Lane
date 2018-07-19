@@ -3,6 +3,7 @@ import {
   addDays,
   formatDay,
   getDate,
+  getTime,
   createTimeGroupZone,
   parseHourMinute2Time,
   formatDayHourMinute,
@@ -10,20 +11,42 @@ import {
 
 const logger = new Log('mockstock.js', Log.Error)
 
-export function simpleStockDayTimeProvider(date = new Date(), days = 10, ...zones) {
+/**
+ * 模拟股票时间区间
+ * @type {*[]}
+ */
+export const StockZones = [['09:30', '11:30'], ['13:01', '15:00']]
+
+function dayTimeDataGenerator(date, value) {
+  return {
+    date,
+    value,
+    timestamp: formatDayHourMinute(date),
+  }
+}
+
+/**
+ * 模拟分钟K线生成器
+ * @param date
+ * @param days
+ * @param generator
+ * @param zones
+ * @returns {function({code: *, type: *, time: *, count: *}): Promise}
+ */
+export function simpleStockDayTimeProvider(date = new Date(), days = 10, generator = dayTimeDataGenerator, ...zones) {
+  if (zones.length === 0) {
+    zones = StockZones
+  }
   const stocks = []
   const timeZone = createTimeGroupZone.apply(null, [1].concat(zones))
   const timeKeys = Object.keys(timeZone)
+  date = getTime(date)
 
   let value = 0
   while(days) {
     for (let i = timeKeys.length - 1; i >= 0; i--) {
       const time = parseHourMinute2Time(timeKeys[i], date)
-      stocks.unshift({
-        date: time,
-        value: value++,
-        timestamp: formatDayHourMinute(time),
-      })
+      stocks.unshift(generator(time, value++, stocks))
     }
 
     days--
@@ -60,29 +83,30 @@ export function simpleStockDayTimeProvider(date = new Date(), days = 10, ...zone
   }
 }
 
+function dayDataGenerator(date, value) {
+  return {
+    date,
+    value,
+    timestamp: formatDay(date),
+  }
+}
+
 /**
  * 模拟日线股票生成器
- * @param time
- * @param count
+ * @param date
+ * @param days
+ * @param generator
  * @returns {function({code: *, type: *, time: *, count: *}): Promise<any>}
  */
-export function simpleStockDayProvider(time, count) {
+export function simpleStockDayProvider(date = new Date(), days = 10, generator = dayDataGenerator) {
 
   // 生成指定开始时间，指定数量的模拟数据
-  const begin = getDate(time)
-  const stocks = [{
-    date: begin,
-    value: 0,
-    timestamp: formatDay(begin),
-  }]
+  const begin = getDate(date)
+  const stocks = [generator(begin, 0, [])]
 
-  for(let i = 1; i < count; i++) {
+  for(let i = 1; i < days; i++) {
     const date = addDays(new Date(begin), -1 * i)
-    stocks.unshift({
-      date,
-      value: i,
-      timestamp: formatDay(date),
-    })
+    stocks.unshift(generator(date, i, stocks))
   }
   logger.debug('stocks api initialized: ', stocks)
 

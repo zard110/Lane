@@ -6,7 +6,7 @@ import {
 
 import {formatDayHourMinute} from "../utils/time";
 
-const Mock_API = simpleStockDayTimeProvider(new Date(), 10, ['09:30', '11:30'], ['13:01', '15:00'])
+const Mock_API = simpleStockDayTimeProvider(new Date(), 10)
 const ONE_MINUTE = '1m'
 
 /**
