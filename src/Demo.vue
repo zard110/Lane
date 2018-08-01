@@ -2,8 +2,8 @@
   <StockContainer>
     <!-- 数据源 -->
     <StockQuery :main="true" :code="code" :unit="unit" :count="count" id="stock_query"></StockQuery>
-    <HighAndLowQuery id="highAndLow_query" data-ref="stock_query" type="date_range"></HighAndLowQuery>
-    <DrawQuery id="draw_query" data-ref="stock_query" type="date_range"></DrawQuery>
+    <HighAndLowQuery id="highAndLow_query"></HighAndLowQuery>
+    <DrawQuery id="draw_query"></DrawQuery>
 
     <!-- 十字光标 -->
     <StockCrosshair :x="x" :y="y"></StockCrosshair>
