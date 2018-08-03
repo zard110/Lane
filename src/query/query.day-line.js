@@ -24,13 +24,29 @@ export default class QueryDayLine extends Query {
     this.store = this.switchStore(options)
   }
 
-  load(count, end) {
+  /**
+   * 首次加载数据、ZoomIn、ZoomOut
+   * @param count
+   */
+  load(count) {
+    this.count = count
+  }
+
+  next(step) {
+
+  }
+
+  prev(step) {
+
+  }
+
+  loadMore(count, end) {
     // 获取标准时间
     const now =  this.parseIndex(Lane.getTime())
     end = end || now
 
     // 本地最后一条数据时间
-    const last = this.parseIndex(this.data[this.data.length - 1])
+    const last = this.parseIndex(this.origin[this.origin.length - 1])
 
     // 需要数据的时间
     const time = this.parseIndex(end)

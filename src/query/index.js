@@ -22,7 +22,6 @@ export default class Query extends Events {
     this.dataIndex = {}
 
     this.current = undefined
-
     this.currentIndex = 0
   }
 }
